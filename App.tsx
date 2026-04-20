@@ -1386,6 +1386,8 @@ export default function App() {
           return;
         }
 
+        setLocationSource(source);
+
         if (isInitial) {
           setPhase('loading-data');
         }
@@ -1428,7 +1430,6 @@ export default function App() {
         setWeather(weatherResult.value);
         setRoads(nextRoads);
         setOutside(nextOutside);
-        setLocationSource(source);
         setPhase('ready');
       } catch (error) {
         if (requestIdRef.current !== requestId) {

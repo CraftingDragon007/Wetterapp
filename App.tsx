@@ -124,6 +124,16 @@ type OpenMeteoGeocodingResponse = {
   }>;
 };
 
+type ReverseGeocodingResponse = {
+  address?: {
+    city?: string;
+    country_code?: string;
+    municipality?: string;
+    town?: string;
+    village?: string;
+  };
+};
+
 type AirQualityResponse = {
   current?: {
     alder_pollen?: number;
@@ -174,6 +184,7 @@ const ROAD_RADIUS_METERS = 1800;
 const WEATHER_ENDPOINT = 'https://api.open-meteo.com/v1/forecast';
 const AIR_QUALITY_ENDPOINT = 'https://air-quality-api.open-meteo.com/v1/air-quality';
 const GEOCODING_ENDPOINT = 'https://geocoding-api.open-meteo.com/v1/search';
+const REVERSE_GEOCODING_ENDPOINT = 'https://nominatim.openstreetmap.org/reverse';
 const OVERPASS_ENDPOINT = 'https://overpass-api.de/api/interpreter';
 const PREFERENCES_KEY = 'live-data-view.preferences.v1';
 const MAJOR_ROADS = new Set(['motorway', 'trunk', 'primary', 'secondary']);
@@ -372,6 +383,60 @@ async function geocodeFixedLocation(query: string) {
     latitude: match.latitude,
     longitude: match.longitude,
   };
+}
+
+async function getLiveLocationLabel(latitude: number, longitude: number) {
+  try {
+    const results = await Location.reverseGeocodeAsync({ latitude, longitude });
+    const match = results.find((result) => {
+      const place = result.city ?? result.subregion ?? result.region;
+      return typeof place === 'string' && place.length > 0;
+    });
+
+    if (match) {
+      const place = match.city ?? match.subregion ?? match.region;
+      const countryCode = typeof match.isoCountryCode === 'string' ? match.isoCountryCode.toUpperCase() : null;
+
+      if (place) {
+        return countryCode ? `${place}, ${countryCode}` : place;
+      }
+    }
+  } catch {
+    // Some Android devices do not provide a native reverse geocoder. Fall back to web lookup.
+  }
+
+  const params = new URLSearchParams({
+    'accept-language': 'de',
+    format: 'jsonv2',
+    lat: String(latitude),
+    lon: String(longitude),
+    zoom: '10',
+  });
+  const response = await fetch(`${REVERSE_GEOCODING_ENDPOINT}?${params.toString()}`, {
+    headers: {
+      Accept: 'application/json',
+    },
+  });
+
+  if (!response.ok) {
+    return 'Aktueller Standort';
+  }
+
+  const payload = (await response.json()) as ReverseGeocodingResponse;
+  const place =
+    payload.address?.city ??
+    payload.address?.town ??
+    payload.address?.village ??
+    payload.address?.municipality;
+  const countryCode = payload.address?.country_code?.toUpperCase();
+
+  if (typeof place === 'string' && place.length > 0) {
+    return typeof countryCode === 'string' && countryCode.length > 0
+      ? `${place}, ${countryCode}`
+      : place;
+  }
+
+  return 'Aktueller Standort';
 }
 
 function getAirQualityUrl(latitude: number, longitude: number) {
@@ -933,12 +998,7 @@ function SettingsMenu({
     outputRange: [0, 1],
     extrapolate: 'clamp',
   });
-  const sourceLabel =
-    locationSource?.kind === 'fixed'
-      ? locationSource.label
-      : locationSource?.kind === 'live'
-        ? 'Live-Standort'
-        : 'Noch nicht geladen';
+  const sourceLabel = locationSource?.label ?? 'Noch nicht geladen';
 
   return (
     <Animated.View style={[styles.settingsOverlay, { opacity }]}>
@@ -1350,10 +1410,11 @@ export default function App() {
       const location = await Location.getCurrentPositionAsync({
         accuracy: Location.Accuracy.Balanced,
       });
+      const liveLabel = await getLiveLocationLabel(location.coords.latitude, location.coords.longitude);
 
       return {
         kind: 'live',
-        label: 'Live-Standort',
+        label: liveLabel,
         latitude: location.coords.latitude,
         longitude: location.coords.longitude,
       };

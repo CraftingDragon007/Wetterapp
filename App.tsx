@@ -3,6 +3,7 @@ import * as Location from 'expo-location';
 import { StatusBar as ExpoStatusBar } from 'expo-status-bar';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { ReactNode } from 'react';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import {
   ActivityIndicator,
   Animated,
@@ -13,7 +14,6 @@ import {
   PanResponder,
   Platform,
   Pressable,
-  SafeAreaView,
   ScrollView,
   StatusBar as NativeStatusBar,
   StyleSheet,
@@ -24,7 +24,6 @@ import {
   useWindowDimensions,
   View,
 } from 'react-native';
-import type { NativeScrollEvent, NativeSyntheticEvent } from 'react-native';
 
 type AppPhase =
   | 'loading-preferences'
@@ -554,22 +553,6 @@ function createOutsideUnavailableData(reason = 'Außendaten wurden noch nicht ge
   };
 }
 
-function getRoadLevel(roads: RoadData) {
-  return clamp(Math.round(100 * (1 - Math.exp(-roads.score / 8))), 0, 88);
-}
-
-function getRoadLevelLabel(roads: RoadData) {
-  if (roads.tone === 'busy') {
-    return 'Hoch';
-  }
-
-  if (roads.tone === 'moderate') {
-    return 'Mittel';
-  }
-
-  return 'Niedrig';
-}
-
 function getRoadFactors(roads: RoadData) {
   const roadworks =
     roads.constructionCount === 0
@@ -656,20 +639,33 @@ function getPollenLabel(pollen: number | null) {
 type Styles = ReturnType<typeof createStyles>;
 
 function PageIndicator({
-  activeIndex,
+  scrollY,
   styles,
+  viewportHeight,
 }: {
-  activeIndex: number;
+  scrollY: Animated.Value;
   styles: Styles;
+  viewportHeight: number;
 }) {
+  const safeHeight = Math.max(viewportHeight, 1);
+  const indicatorTranslateX = scrollY.interpolate({
+    inputRange: [0, safeHeight, safeHeight * 2],
+    outputRange: [0, 28, 56],
+    extrapolate: 'clamp',
+  });
+
   return (
     <View style={styles.pageIndicator}>
-      {PAGES.map((page, index) => (
-        <View
-          key={page}
-          style={[styles.pageDot, index === activeIndex && styles.pageDotActive]}
-        />
+      {PAGES.map((page) => (
+        <View key={page} style={styles.pageDot} />
       ))}
+      <Animated.View
+        pointerEvents="none"
+        style={[
+          styles.pageIndicatorHighlight,
+          { transform: [{ translateX: indicatorTranslateX }] },
+        ]}
+      />
     </View>
   );
 }
@@ -708,18 +704,46 @@ function PageFrame({
 }
 
 function Header({
-  activeIndex,
+  onOpenSettings,
+  scrollY,
   styles,
   title,
+  viewportHeight,
 }: {
-  activeIndex: number;
+  onOpenSettings: () => void;
+  scrollY: Animated.Value;
   styles: Styles;
   title: string;
+  viewportHeight: number;
 }) {
   return (
     <View style={styles.header}>
       <Text style={styles.title}>{title}</Text>
-      <PageIndicator activeIndex={activeIndex} styles={styles} />
+      <View style={styles.headerActions}>
+        <Pressable
+          accessibilityLabel="Einstellungen öffnen"
+          accessibilityRole="button"
+          hitSlop={10}
+          onPress={onOpenSettings}
+          style={styles.settingsButton}
+        >
+          <View style={styles.settingsIcon}>
+            <View style={styles.settingsIconRow}>
+              <View style={styles.settingsIconTrack} />
+              <View style={[styles.settingsIconKnob, styles.settingsIconKnobTop]} />
+            </View>
+            <View style={styles.settingsIconRow}>
+              <View style={styles.settingsIconTrack} />
+              <View style={[styles.settingsIconKnob, styles.settingsIconKnobMiddle]} />
+            </View>
+            <View style={styles.settingsIconRow}>
+              <View style={styles.settingsIconTrack} />
+              <View style={[styles.settingsIconKnob, styles.settingsIconKnobBottom]} />
+            </View>
+          </View>
+        </Pressable>
+        <PageIndicator scrollY={scrollY} styles={styles} viewportHeight={viewportHeight} />
+      </View>
     </View>
   );
 }
@@ -960,19 +984,29 @@ function SettingsMenu({
 }
 
 function OutsidePage({
-  activeIndex,
+  onOpenSettings,
   outside,
+  scrollY,
   styles,
   theme,
+  viewportHeight,
 }: {
-  activeIndex: number;
+  onOpenSettings: () => void;
   outside: OutsideData;
+  scrollY: Animated.Value;
   styles: Styles;
   theme: Theme;
+  viewportHeight: number;
 }) {
   return (
     <>
-      <Header activeIndex={activeIndex} styles={styles} title="Draußen" />
+      <Header
+        onOpenSettings={onOpenSettings}
+        scrollY={scrollY}
+        styles={styles}
+        title="Draußen"
+        viewportHeight={viewportHeight}
+      />
       <SummaryBlock
         styles={styles}
         summary={outside.summary}
@@ -1011,19 +1045,29 @@ function OutsidePage({
 }
 
 function WeatherPage({
-  activeIndex,
+  onOpenSettings,
+  scrollY,
   styles,
+  viewportHeight,
   weather,
 }: {
-  activeIndex: number;
+  onOpenSettings: () => void;
+  scrollY: Animated.Value;
   styles: Styles;
+  viewportHeight: number;
   weather: WeatherData;
 }) {
   const weatherDescription = describeWeatherCode(weather.weatherCode);
 
   return (
     <>
-      <Header activeIndex={activeIndex} styles={styles} title="Wetter" />
+      <Header
+        onOpenSettings={onOpenSettings}
+        scrollY={scrollY}
+        styles={styles}
+        title="Wetter"
+        viewportHeight={viewportHeight}
+      />
       <View style={styles.temperatureBlock}>
         <Text style={styles.weatherStatus}>{weatherDescription}</Text>
         <View style={styles.temperatureRow}>
@@ -1049,23 +1093,31 @@ function WeatherPage({
 }
 
 function RoadsPage({
-  activeIndex,
+  onOpenSettings,
   roads,
+  scrollY,
   styles,
   theme,
+  viewportHeight,
 }: {
-  activeIndex: number;
+  onOpenSettings: () => void;
   roads: RoadData;
+  scrollY: Animated.Value;
   styles: Styles;
   theme: Theme;
+  viewportHeight: number;
 }) {
-  const roadLevel = getRoadLevel(roads);
   const factors = getRoadFactors(roads);
-  const toneColor = getToneColor(theme, roads.tone);
 
   return (
     <>
-      <Header activeIndex={activeIndex} styles={styles} title="Straßen" />
+      <Header
+        onOpenSettings={onOpenSettings}
+        scrollY={scrollY}
+        styles={styles}
+        title="Straßen"
+        viewportHeight={viewportHeight}
+      />
       <SummaryBlock
         styles={styles}
         summary={roads.summary}
@@ -1075,23 +1127,6 @@ function RoadsPage({
       >
         <Text style={styles.explainerText}>Aus Kartendaten geschätzt, keine Live-Staugeschwindigkeit.</Text>
       </SummaryBlock>
-      <View style={styles.meterBlock}>
-        <View style={styles.meterHeader}>
-          <Text style={styles.dataLabel}>Einschätzung</Text>
-          <Text style={styles.meterValue}>{getRoadLevelLabel(roads)}</Text>
-        </View>
-        <View style={styles.meterTrack}>
-          <View
-            style={[
-              styles.meterFill,
-              {
-                backgroundColor: toneColor,
-                width: `${Math.max(roadLevel, 4)}%`,
-              },
-            ]}
-          />
-        </View>
-      </View>
       <View style={styles.section}>
         {factors.map((factor) => (
           <DataRow
@@ -1128,7 +1163,6 @@ export default function App() {
   const [outside, setOutside] = useState<OutsideData | null>(null);
   const [locationSource, setLocationSource] = useState<LocationSource | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [activeIndex, setActiveIndex] = useState(PAGE_INDEX.weather);
   const retryTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const requestIdRef = useRef(0);
   const syncInFlightRef = useRef(false);
@@ -1189,17 +1223,19 @@ export default function App() {
           }
 
           return (
-            gestureState.dx > 42 &&
-            Math.abs(gestureState.dx) > Math.abs(gestureState.dy) * 1.35
+            gestureState.x0 <= Math.min(windowWidth * 0.24, 120) &&
+            gestureState.dx > 18 &&
+            gestureState.vx > 0.05 &&
+            Math.abs(gestureState.dx) > Math.abs(gestureState.dy) * 1.1
           );
         },
         onPanResponderRelease: (_, gestureState) => {
-          if (gestureState.dx > 58) {
+          if (gestureState.x0 <= Math.min(windowWidth * 0.3, 144) && (gestureState.dx > 34 || gestureState.vx > 0.42)) {
             openSettingsMenu();
           }
         },
       }),
-    [openSettingsMenu, settingsOpen],
+    [openSettingsMenu, settingsOpen, windowWidth],
   );
 
   const savePreferences = useCallback(async (nextPreferences: StoredPreferences) => {
@@ -1499,18 +1535,6 @@ export default function App() {
     }
   }, []);
 
-  const handleMomentumScrollEnd = useCallback(
-    (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-      const nextIndex = clamp(
-        Math.round(event.nativeEvent.contentOffset.y / Math.max(viewportHeight, 1)),
-        0,
-        PAGES.length - 1,
-      );
-      setActiveIndex(nextIndex);
-    },
-    [viewportHeight],
-  );
-
   const handleThemeModeChange = useCallback((nextThemeMode: ThemeMode) => {
     setThemeMode(nextThemeMode);
     setSettingsMessage(
@@ -1590,15 +1614,17 @@ export default function App() {
 
   if (phase === 'permission-blocked') {
     return (
-      <SafeAreaView style={styles.screen} {...settingsPanResponder.panHandlers}>
-        <ExpoStatusBar style={scheme === 'dark' ? 'light' : 'dark'} />
-        <View style={styles.centered}>
-          <Pressable style={styles.primaryButton} onPress={openSystemSettings}>
-            <Text style={styles.primaryButtonText}>Standort-Einstellungen öffnen</Text>
-          </Pressable>
-        </View>
-        {renderSettingsMenu()}
-      </SafeAreaView>
+      <SafeAreaProvider>
+        <SafeAreaView edges={['left', 'right']} style={styles.screen} {...settingsPanResponder.panHandlers}>
+          <ExpoStatusBar style={scheme === 'dark' ? 'light' : 'dark'} />
+          <View style={styles.centered}>
+            <Pressable style={styles.primaryButton} onPress={openSystemSettings}>
+              <Text style={styles.primaryButtonText}>Standort-Einstellungen öffnen</Text>
+            </Pressable>
+          </View>
+          {renderSettingsMenu()}
+        </SafeAreaView>
+      </SafeAreaProvider>
     );
   }
 
@@ -1606,28 +1632,30 @@ export default function App() {
     const isError = phase === 'error';
 
     return (
-      <SafeAreaView style={styles.screen} {...settingsPanResponder.panHandlers}>
-        <ExpoStatusBar style={scheme === 'dark' ? 'light' : 'dark'} />
-        <View style={styles.centered}>
-          {isError ? (
-            <>
-              <Text style={styles.errorTitle}>Daten nicht verfügbar</Text>
-              <Text style={styles.errorText}>
-                {errorMessage ?? 'Standortdaten konnten nicht geladen werden.'}
-              </Text>
-              <Pressable style={styles.primaryButton} onPress={() => syncData('initial')}>
-                <Text style={styles.primaryButtonText}>Erneut versuchen</Text>
-              </Pressable>
-            </>
-          ) : (
-            <>
-              <ActivityIndicator size="large" color={theme.accent} />
-              <Text style={styles.loadingText}>{loadingLabel}</Text>
-            </>
-          )}
-        </View>
-        {renderSettingsMenu()}
-      </SafeAreaView>
+      <SafeAreaProvider>
+        <SafeAreaView edges={['left', 'right']} style={styles.screen} {...settingsPanResponder.panHandlers}>
+          <ExpoStatusBar style={scheme === 'dark' ? 'light' : 'dark'} />
+          <View style={styles.centered}>
+            {isError ? (
+              <>
+                <Text style={styles.errorTitle}>Daten nicht verfügbar</Text>
+                <Text style={styles.errorText}>
+                  {errorMessage ?? 'Standortdaten konnten nicht geladen werden.'}
+                </Text>
+                <Pressable style={styles.primaryButton} onPress={() => syncData('initial')}>
+                  <Text style={styles.primaryButtonText}>Erneut versuchen</Text>
+                </Pressable>
+              </>
+            ) : (
+              <>
+                <ActivityIndicator size="large" color={theme.accent} />
+                <Text style={styles.loadingText}>{loadingLabel}</Text>
+              </>
+            )}
+          </View>
+          {renderSettingsMenu()}
+        </SafeAreaView>
+      </SafeAreaProvider>
     );
   }
 
@@ -1637,101 +1665,113 @@ export default function App() {
   });
 
   return (
-    <SafeAreaView
-      style={styles.screen}
-      onLayout={handleScreenLayout}
-      {...settingsPanResponder.panHandlers}
-    >
-      <ExpoStatusBar style={scheme === 'dark' ? 'light' : 'dark'} />
-      <Animated.ScrollView
-        ref={scrollRef}
-        bounces={false}
-        contentContainerStyle={styles.scrollContent}
-        decelerationRate="fast"
-        onMomentumScrollEnd={handleMomentumScrollEnd}
-        onScroll={Animated.event(
-          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-          { useNativeDriver: true },
-        )}
-        overScrollMode="never"
-        pagingEnabled
-        scrollEventThrottle={16}
-        showsVerticalScrollIndicator={false}
-        snapToInterval={viewportHeight}
+    <SafeAreaProvider>
+      <SafeAreaView
+        edges={['left', 'right']}
+        style={styles.screen}
+        onLayout={handleScreenLayout}
+        {...settingsPanResponder.panHandlers}
       >
-        <View style={[styles.page, pageInsets, { height: viewportHeight }]}>
-          <Animated.View
-            style={[
-              styles.readyIntro,
-              {
-                opacity: readyIntro,
-                transform: [{ translateY: introTranslateY }],
-              },
-            ]}
-          >
-            <PageFrame
-              index={PAGE_INDEX.outside}
-              scrollY={scrollY}
-              styles={styles}
-              viewportHeight={viewportHeight}
+        <ExpoStatusBar style={scheme === 'dark' ? 'light' : 'dark'} />
+        <Animated.ScrollView
+          ref={scrollRef}
+          bounces={false}
+          contentContainerStyle={styles.scrollContent}
+          decelerationRate="fast"
+          onScroll={Animated.event(
+            [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+            { useNativeDriver: true },
+          )}
+          overScrollMode="never"
+          pagingEnabled
+          scrollEventThrottle={16}
+          showsVerticalScrollIndicator={false}
+          snapToInterval={viewportHeight}
+        >
+          <View style={[styles.page, pageInsets, { height: viewportHeight }]}> 
+            <Animated.View
+              style={[
+                styles.readyIntro,
+                {
+                  opacity: readyIntro,
+                  transform: [{ translateY: introTranslateY }],
+                },
+              ]}
             >
-              <OutsidePage
-                activeIndex={activeIndex}
-                outside={outside}
+              <PageFrame
+                index={PAGE_INDEX.outside}
+                scrollY={scrollY}
                 styles={styles}
-                theme={theme}
-              />
-            </PageFrame>
-          </Animated.View>
-        </View>
-        <View style={[styles.page, pageInsets, { height: viewportHeight }]}>
-          <Animated.View
-            style={[
-              styles.readyIntro,
-              {
-                opacity: readyIntro,
-                transform: [{ translateY: introTranslateY }],
-              },
-            ]}
-          >
-            <PageFrame
-              index={PAGE_INDEX.weather}
-              scrollY={scrollY}
-              styles={styles}
-              viewportHeight={viewportHeight}
+                viewportHeight={viewportHeight}
+              >
+                <OutsidePage
+                  onOpenSettings={openSettingsMenu}
+                  outside={outside}
+                  scrollY={scrollY}
+                  styles={styles}
+                  theme={theme}
+                  viewportHeight={viewportHeight}
+                />
+              </PageFrame>
+            </Animated.View>
+          </View>
+          <View style={[styles.page, pageInsets, { height: viewportHeight }]}> 
+            <Animated.View
+              style={[
+                styles.readyIntro,
+                {
+                  opacity: readyIntro,
+                  transform: [{ translateY: introTranslateY }],
+                },
+              ]}
             >
-              <WeatherPage activeIndex={activeIndex} styles={styles} weather={weather} />
-            </PageFrame>
-          </Animated.View>
-        </View>
-        <View style={[styles.page, pageInsets, { height: viewportHeight }]}>
-          <Animated.View
-            style={[
-              styles.readyIntro,
-              {
-                opacity: readyIntro,
-                transform: [{ translateY: introTranslateY }],
-              },
-            ]}
-          >
-            <PageFrame
-              index={PAGE_INDEX.roads}
-              scrollY={scrollY}
-              styles={styles}
-              viewportHeight={viewportHeight}
-            >
-              <RoadsPage
-                activeIndex={activeIndex}
-                roads={roads}
+              <PageFrame
+                index={PAGE_INDEX.weather}
+                scrollY={scrollY}
                 styles={styles}
-                theme={theme}
-              />
-            </PageFrame>
-          </Animated.View>
-        </View>
-      </Animated.ScrollView>
-      {renderSettingsMenu()}
-    </SafeAreaView>
+                viewportHeight={viewportHeight}
+              >
+                <WeatherPage
+                  onOpenSettings={openSettingsMenu}
+                  scrollY={scrollY}
+                  styles={styles}
+                  viewportHeight={viewportHeight}
+                  weather={weather}
+                />
+              </PageFrame>
+            </Animated.View>
+          </View>
+          <View style={[styles.page, pageInsets, { height: viewportHeight }]}> 
+            <Animated.View
+              style={[
+                styles.readyIntro,
+                {
+                  opacity: readyIntro,
+                  transform: [{ translateY: introTranslateY }],
+                },
+              ]}
+            >
+              <PageFrame
+                index={PAGE_INDEX.roads}
+                scrollY={scrollY}
+                styles={styles}
+                viewportHeight={viewportHeight}
+              >
+                <RoadsPage
+                  onOpenSettings={openSettingsMenu}
+                  roads={roads}
+                  scrollY={scrollY}
+                  styles={styles}
+                  theme={theme}
+                  viewportHeight={viewportHeight}
+                />
+              </PageFrame>
+            </Animated.View>
+          </View>
+        </Animated.ScrollView>
+        {renderSettingsMenu()}
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 }
 
@@ -1812,6 +1852,11 @@ function createStyles(theme: Theme) {
       flexDirection: 'row',
       justifyContent: 'space-between',
     },
+    headerActions: {
+      alignItems: 'center',
+      flexDirection: 'row',
+      gap: 12,
+    },
     loadingText: {
       color: theme.muted,
       fontSize: 15,
@@ -1827,29 +1872,6 @@ function createStyles(theme: Theme) {
       minHeight: 48,
       paddingHorizontal: 13,
       paddingVertical: 10,
-    },
-    meterBlock: {
-      gap: 10,
-    },
-    meterFill: {
-      borderRadius: 3,
-      height: '100%',
-    },
-    meterHeader: {
-      alignItems: 'center',
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-    },
-    meterTrack: {
-      backgroundColor: theme.border,
-      borderRadius: 3,
-      height: 8,
-      overflow: 'hidden',
-    },
-    meterValue: {
-      color: theme.text,
-      fontSize: 16,
-      fontWeight: '800',
     },
     optionList: {
       gap: 8,
@@ -1900,16 +1922,66 @@ function createStyles(theme: Theme) {
       backgroundColor: theme.border,
       borderRadius: 3,
       height: 6,
-      width: 6,
-    },
-    pageDotActive: {
-      backgroundColor: theme.accent,
       width: 22,
     },
     pageIndicator: {
       alignItems: 'center',
       flexDirection: 'row',
       gap: 6,
+      height: 6,
+      position: 'relative',
+    },
+    pageIndicatorHighlight: {
+      backgroundColor: theme.accent,
+      borderRadius: 3,
+      height: 6,
+      left: 0,
+      position: 'absolute',
+      top: 0,
+      width: 22,
+      zIndex: 1,
+    },
+    settingsButton: {
+      alignItems: 'center',
+      backgroundColor: theme.surface,
+      borderColor: theme.border,
+      borderRadius: 10,
+      borderWidth: 1,
+      height: 34,
+      justifyContent: 'center',
+      width: 34,
+    },
+    settingsIcon: {
+      gap: 4,
+      width: 16,
+    },
+    settingsIconKnob: {
+      backgroundColor: theme.accent,
+      borderRadius: 2,
+      height: 4,
+      position: 'absolute',
+      top: 0,
+      width: 4,
+    },
+    settingsIconKnobBottom: {
+      left: 9,
+    },
+    settingsIconKnobMiddle: {
+      left: 4,
+    },
+    settingsIconKnobTop: {
+      left: 1,
+    },
+    settingsIconRow: {
+      height: 4,
+      justifyContent: 'center',
+      position: 'relative',
+    },
+    settingsIconTrack: {
+      backgroundColor: theme.muted,
+      borderRadius: 1,
+      height: 2,
+      width: '100%',
     },
     plainButton: {
       alignItems: 'center',

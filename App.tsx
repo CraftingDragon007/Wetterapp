@@ -348,8 +348,10 @@ async function geocodeFixedLocation(query: string) {
     );
 
     if (match) {
+      const resolvedLabel = await getLiveLocationLabel(match.latitude, match.longitude);
+
       return {
-        label: query,
+        label: resolvedLabel ?? query,
         latitude: match.latitude,
         longitude: match.longitude,
       };

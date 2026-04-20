@@ -480,14 +480,17 @@ function getRoadStatus(
   signalCount: number,
   roadCount: number,
 ) {
+  const majorRoadPressure = Math.max(majorRoadCount - 2, 0);
+  const signalPressure = Math.max(signalCount - 6, 0);
+  const roadDensityPressure = Math.max(Math.min(roadCount, 80) - 18, 0);
   const score =
-    constructionCount * 3 +
-    restrictionCount * 2 +
-    majorRoadCount * 0.45 +
-    signalCount * 0.08 +
-    Math.min(roadCount, 80) * 0.025;
+    constructionCount * 3.4 +
+    restrictionCount * 2.2 +
+    majorRoadPressure * 0.32 +
+    signalPressure * 0.06 +
+    roadDensityPressure * 0.018;
 
-  if (constructionCount >= 3 || score >= 8) {
+  if (constructionCount >= 3 || restrictionCount >= 4 || score >= 8.5) {
     return {
       score,
       status: 'Viel los',
@@ -496,7 +499,7 @@ function getRoadStatus(
     };
   }
 
-  if (constructionCount > 0 || restrictionCount > 0 || score >= 3.5) {
+  if (constructionCount > 0 || restrictionCount > 0 || score >= 2.8) {
     return {
       score,
       status: 'Ganz normal',

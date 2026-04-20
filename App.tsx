@@ -856,8 +856,7 @@ function SettingsMenu({
   return (
     <Animated.View style={[styles.settingsOverlay, { opacity }]}>
       <Pressable accessibilityRole="button" style={styles.settingsBackdrop} onPress={onClose} />
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+      <Animated.View
         style={[
           styles.settingsDrawer,
           {
@@ -866,91 +865,96 @@ function SettingsMenu({
           },
         ]}
       >
-        <ScrollView
-          contentContainerStyle={[styles.settingsContent, settingsInsets]}
-          keyboardShouldPersistTaps="handled"
-          showsVerticalScrollIndicator={false}
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+          style={styles.settingsDrawerContent}
         >
-          <View style={styles.settingsHeader}>
-            <Text style={styles.settingsTitle}>Einstellungen</Text>
-            <Pressable accessibilityRole="button" onPress={onClose} style={styles.closeButton}>
-              <Text style={styles.closeButtonText}>Schließen</Text>
-            </Pressable>
-          </View>
-
-          <View style={styles.settingsGroup}>
-            <Text style={styles.settingsLabel}>Darstellung</Text>
-            <View style={styles.optionList}>
-              <ThemeOption
-                active={themeMode === 'system'}
-                label="System"
-                onPress={() => onThemeModeChange('system')}
-                styles={styles}
-              />
-              <ThemeOption
-                active={themeMode === 'light'}
-                label="Hell"
-                onPress={() => onThemeModeChange('light')}
-                styles={styles}
-              />
-              <ThemeOption
-                active={themeMode === 'dark'}
-                label="Dunkel"
-                onPress={() => onThemeModeChange('dark')}
-                styles={styles}
-              />
+          <ScrollView
+            contentContainerStyle={[styles.settingsContent, settingsInsets]}
+            keyboardShouldPersistTaps="handled"
+            showsVerticalScrollIndicator={false}
+          >
+            <View style={styles.settingsHeader}>
+              <Text style={styles.settingsTitle}>Einstellungen</Text>
+              <Pressable accessibilityRole="button" onPress={onClose} style={styles.closeButton}>
+                <Text style={styles.closeButtonText}>Schließen</Text>
+              </Pressable>
             </View>
-          </View>
 
-          <View style={styles.settingsGroup}>
-            <View style={styles.switchRow}>
-              <View style={styles.switchText}>
-                <Text style={styles.settingsLabel}>Fester Ort</Text>
-                <Text style={styles.settingsHelp}>Wenn aktiv, werden Daten für diesen Ort geladen.</Text>
+            <View style={styles.settingsGroup}>
+              <Text style={styles.settingsLabel}>Darstellung</Text>
+              <View style={styles.optionList}>
+                <ThemeOption
+                  active={themeMode === 'system'}
+                  label="System"
+                  onPress={() => onThemeModeChange('system')}
+                  styles={styles}
+                />
+                <ThemeOption
+                  active={themeMode === 'light'}
+                  label="Hell"
+                  onPress={() => onThemeModeChange('light')}
+                  styles={styles}
+                />
+                <ThemeOption
+                  active={themeMode === 'dark'}
+                  label="Dunkel"
+                  onPress={() => onThemeModeChange('dark')}
+                  styles={styles}
+                />
               </View>
-              <Switch
-                ios_backgroundColor={theme.border}
-                onValueChange={onChangeDraftFixedLocationEnabled}
-                thumbColor={Platform.OS === 'android' ? theme.surface : undefined}
-                trackColor={{ false: theme.border, true: theme.accent }}
-                value={draftFixedLocationEnabled}
-              />
             </View>
-            <TextInput
-              autoCapitalize="words"
-              autoCorrect={false}
-              keyboardAppearance={scheme}
-              onChangeText={onChangeDraftFixedLocationText}
-              placeholder="z. B. Zürich, Schweiz"
-              placeholderTextColor={theme.muted}
-              returnKeyType="done"
-              selectionColor={theme.accent}
-              style={styles.locationInput}
-              value={draftFixedLocationText}
-            />
-            <Pressable
-              accessibilityRole="button"
-              onPress={onApplyLocationSettings}
-              style={styles.secondaryButton}
-            >
-              <Text style={styles.secondaryButtonText}>Ort übernehmen</Text>
-            </Pressable>
-            {settingsMessage ? <Text style={styles.settingsMessage}>{settingsMessage}</Text> : null}
-            <Text style={styles.settingsFootnote}>Aktive Datenquelle: {sourceLabel}</Text>
-          </View>
 
-          <View style={styles.settingsGroup}>
-            <Text style={styles.settingsLabel}>Systemstandort</Text>
-            <Pressable
-              accessibilityRole="button"
-              onPress={onOpenSystemSettings}
-              style={styles.plainButton}
-            >
-              <Text style={styles.plainButtonText}>Standort-Einstellungen öffnen</Text>
-            </Pressable>
-          </View>
-        </ScrollView>
-      </KeyboardAvoidingView>
+            <View style={styles.settingsGroup}>
+              <View style={styles.switchRow}>
+                <View style={styles.switchText}>
+                  <Text style={styles.settingsLabel}>Fester Ort</Text>
+                  <Text style={styles.settingsHelp}>Wenn aktiv, werden Daten für diesen Ort geladen.</Text>
+                </View>
+                <Switch
+                  ios_backgroundColor={theme.border}
+                  onValueChange={onChangeDraftFixedLocationEnabled}
+                  thumbColor={Platform.OS === 'android' ? theme.surface : undefined}
+                  trackColor={{ false: theme.border, true: theme.accent }}
+                  value={draftFixedLocationEnabled}
+                />
+              </View>
+              <TextInput
+                autoCapitalize="words"
+                autoCorrect={false}
+                keyboardAppearance={scheme}
+                onChangeText={onChangeDraftFixedLocationText}
+                placeholder="z. B. Zürich, Schweiz"
+                placeholderTextColor={theme.muted}
+                returnKeyType="done"
+                selectionColor={theme.accent}
+                style={styles.locationInput}
+                value={draftFixedLocationText}
+              />
+              <Pressable
+                accessibilityRole="button"
+                onPress={onApplyLocationSettings}
+                style={styles.secondaryButton}
+              >
+                <Text style={styles.secondaryButtonText}>Ort übernehmen</Text>
+              </Pressable>
+              {settingsMessage ? <Text style={styles.settingsMessage}>{settingsMessage}</Text> : null}
+              <Text style={styles.settingsFootnote}>Aktive Datenquelle: {sourceLabel}</Text>
+            </View>
+
+            <View style={styles.settingsGroup}>
+              <Text style={styles.settingsLabel}>Systemstandort</Text>
+              <Pressable
+                accessibilityRole="button"
+                onPress={onOpenSystemSettings}
+                style={styles.plainButton}
+              >
+                <Text style={styles.plainButtonText}>Standort-Einstellungen öffnen</Text>
+              </Pressable>
+            </View>
+          </ScrollView>
+        </KeyboardAvoidingView>
+      </Animated.View>
     </Animated.View>
   );
 }
@@ -1969,6 +1973,9 @@ function createStyles(theme: Theme) {
     settingsContent: {
       gap: 24,
       paddingHorizontal: 20,
+    },
+    settingsDrawerContent: {
+      flex: 1,
     },
     settingsDrawer: {
       backgroundColor: theme.surface,

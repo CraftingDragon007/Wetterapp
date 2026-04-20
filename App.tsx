@@ -126,10 +126,14 @@ type OpenMeteoGeocodingResponse = {
 
 type ReverseGeocodingResponse = {
   address?: {
+    county?: string;
     city?: string;
     country_code?: string;
+    hamlet?: string;
     municipality?: string;
+    state?: string;
     town?: string;
+    suburb?: string;
     village?: string;
   };
 };
@@ -389,12 +393,24 @@ async function getLiveLocationLabel(latitude: number, longitude: number) {
   try {
     const results = await Location.reverseGeocodeAsync({ latitude, longitude });
     const match = results.find((result) => {
-      const place = result.city ?? result.subregion ?? result.region;
+      const place =
+        result.city ??
+        result.district ??
+        result.name ??
+        result.street ??
+        result.subregion ??
+        result.region;
       return typeof place === 'string' && place.length > 0;
     });
 
     if (match) {
-      const place = match.city ?? match.subregion ?? match.region;
+      const place =
+        match.city ??
+        match.district ??
+        match.name ??
+        match.street ??
+        match.subregion ??
+        match.region;
       const countryCode = typeof match.isoCountryCode === 'string' ? match.isoCountryCode.toUpperCase() : null;
 
       if (place) {
@@ -419,7 +435,7 @@ async function getLiveLocationLabel(latitude: number, longitude: number) {
   });
 
   if (!response.ok) {
-    return 'Aktueller Standort';
+    return null;
   }
 
   const payload = (await response.json()) as ReverseGeocodingResponse;
@@ -427,7 +443,11 @@ async function getLiveLocationLabel(latitude: number, longitude: number) {
     payload.address?.city ??
     payload.address?.town ??
     payload.address?.village ??
-    payload.address?.municipality;
+    payload.address?.hamlet ??
+    payload.address?.suburb ??
+    payload.address?.municipality ??
+    payload.address?.county ??
+    payload.address?.state;
   const countryCode = payload.address?.country_code?.toUpperCase();
 
   if (typeof place === 'string' && place.length > 0) {
@@ -436,7 +456,7 @@ async function getLiveLocationLabel(latitude: number, longitude: number) {
       : place;
   }
 
-  return 'Aktueller Standort';
+  return null;
 }
 
 function getAirQualityUrl(latitude: number, longitude: number) {
@@ -832,12 +852,14 @@ function PageFrame({
 }
 
 function Header({
+  locationLabel,
   onOpenSettings,
   scrollY,
   styles,
   title,
   viewportHeight,
 }: {
+  locationLabel: string;
   onOpenSettings: () => void;
   scrollY: Animated.Value;
   styles: Styles;
@@ -846,7 +868,10 @@ function Header({
 }) {
   return (
     <View style={styles.header}>
-      <Text style={styles.title}>{title}</Text>
+      <View style={styles.headerTitleBlock}>
+        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.headerLocation}>{locationLabel}</Text>
+      </View>
       <View style={styles.headerActions}>
         <Pressable
           accessibilityLabel="Einstellungen öffnen"
@@ -1107,6 +1132,7 @@ function SettingsMenu({
 }
 
 function OutsidePage({
+  locationLabel,
   onOpenSettings,
   outside,
   scrollY,
@@ -1114,6 +1140,7 @@ function OutsidePage({
   theme,
   viewportHeight,
 }: {
+  locationLabel: string;
   onOpenSettings: () => void;
   outside: OutsideData;
   scrollY: Animated.Value;
@@ -1124,6 +1151,7 @@ function OutsidePage({
   return (
     <>
       <Header
+        locationLabel={locationLabel}
         onOpenSettings={onOpenSettings}
         scrollY={scrollY}
         styles={styles}
@@ -1168,12 +1196,14 @@ function OutsidePage({
 }
 
 function WeatherPage({
+  locationLabel,
   onOpenSettings,
   scrollY,
   styles,
   viewportHeight,
   weather,
 }: {
+  locationLabel: string;
   onOpenSettings: () => void;
   scrollY: Animated.Value;
   styles: Styles;
@@ -1185,6 +1215,7 @@ function WeatherPage({
   return (
     <>
       <Header
+        locationLabel={locationLabel}
         onOpenSettings={onOpenSettings}
         scrollY={scrollY}
         styles={styles}
@@ -1216,6 +1247,7 @@ function WeatherPage({
 }
 
 function RoadsPage({
+  locationLabel,
   onOpenSettings,
   roads,
   scrollY,
@@ -1223,6 +1255,7 @@ function RoadsPage({
   theme,
   viewportHeight,
 }: {
+  locationLabel: string;
   onOpenSettings: () => void;
   roads: RoadData;
   scrollY: Animated.Value;
@@ -1235,6 +1268,7 @@ function RoadsPage({
   return (
     <>
       <Header
+        locationLabel={locationLabel}
         onOpenSettings={onOpenSettings}
         scrollY={scrollY}
         styles={styles}
@@ -1414,13 +1448,14 @@ export default function App() {
 
       return {
         kind: 'live',
-        label: liveLabel,
+        label: liveLabel ? `Aktueller Standort: ${liveLabel}` : 'Aktueller Standort',
         latitude: location.coords.latitude,
         longitude: location.coords.longitude,
       };
     },
     [fixedLocationEnabled, fixedLocationText],
   );
+  const currentLocationLabel = locationSource?.label ?? 'Standort wird ermittelt';
 
   const syncData = useCallback(
     async (mode: 'initial' | 'background' = 'background', sourceOverride?: SourceConfig) => {
@@ -1671,6 +1706,14 @@ export default function App() {
     setFixedLocationEnabled(nextFixedLocationEnabled);
     setFixedLocationText(nextFixedLocationText);
     setDraftFixedLocationText(nextFixedLocationText);
+    if (!nextFixedLocationEnabled) {
+      setLocationSource((currentSource) => ({
+        kind: 'live',
+        label: 'Standort wird ermittelt',
+        latitude: currentSource?.latitude ?? 0,
+        longitude: currentSource?.longitude ?? 0,
+      }));
+    }
     setSettingsMessage(
       nextFixedLocationEnabled && nextFixedLocationText.length > 0
         ? `Fester Ort aktiv: ${nextFixedLocationText}`
@@ -1823,6 +1866,7 @@ export default function App() {
                 viewportHeight={viewportHeight}
               >
                 <OutsidePage
+                  locationLabel={currentLocationLabel}
                   onOpenSettings={openSettingsMenu}
                   outside={outside}
                   scrollY={scrollY}
@@ -1850,6 +1894,7 @@ export default function App() {
                 viewportHeight={viewportHeight}
               >
                 <WeatherPage
+                  locationLabel={currentLocationLabel}
                   onOpenSettings={openSettingsMenu}
                   scrollY={scrollY}
                   styles={styles}
@@ -1876,6 +1921,7 @@ export default function App() {
                 viewportHeight={viewportHeight}
               >
                 <RoadsPage
+                  locationLabel={currentLocationLabel}
                   onOpenSettings={openSettingsMenu}
                   roads={roads}
                   scrollY={scrollY}
@@ -1974,6 +2020,16 @@ function createStyles(theme: Theme) {
       alignItems: 'center',
       flexDirection: 'row',
       gap: 12,
+    },
+    headerLocation: {
+      color: theme.muted,
+      fontSize: 13,
+      fontWeight: '700',
+      marginTop: 4,
+    },
+    headerTitleBlock: {
+      flex: 1,
+      paddingRight: 12,
     },
     loadingText: {
       color: theme.muted,

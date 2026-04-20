@@ -114,6 +114,16 @@ type OpenMeteoResponse = {
   timezone?: string;
 };
 
+type OpenMeteoGeocodingResponse = {
+  results?: Array<{
+    admin1?: string;
+    country?: string;
+    latitude?: number;
+    longitude?: number;
+    name?: string;
+  }>;
+};
+
 type AirQualityResponse = {
   current?: {
     alder_pollen?: number;
@@ -163,6 +173,7 @@ const DATA_SYNC_MS = 15000;
 const ROAD_RADIUS_METERS = 1800;
 const WEATHER_ENDPOINT = 'https://api.open-meteo.com/v1/forecast';
 const AIR_QUALITY_ENDPOINT = 'https://air-quality-api.open-meteo.com/v1/air-quality';
+const GEOCODING_ENDPOINT = 'https://geocoding-api.open-meteo.com/v1/search';
 const OVERPASS_ENDPOINT = 'https://overpass-api.de/api/interpreter';
 const PREFERENCES_KEY = 'live-data-view.preferences.v1';
 const MAJOR_ROADS = new Set(['motorway', 'trunk', 'primary', 'secondary']);
@@ -314,6 +325,55 @@ async function fetchWeather(latitude: number, longitude: number): Promise<Weathe
   };
 }
 
+async function geocodeFixedLocation(query: string) {
+  try {
+    const results = await Location.geocodeAsync(query);
+    const match = results.find(
+      (result) => Number.isFinite(result.latitude) && Number.isFinite(result.longitude),
+    );
+
+    if (match) {
+      return {
+        label: query,
+        latitude: match.latitude,
+        longitude: match.longitude,
+      };
+    }
+  } catch {
+    // Some Android devices do not provide a native geocoder. Fall back to web lookup.
+  }
+
+  const params = new URLSearchParams({
+    count: '1',
+    language: 'de',
+    name: query,
+  });
+  const response = await fetch(`${GEOCODING_ENDPOINT}?${params.toString()}`);
+
+  if (!response.ok) {
+    throw new Error('Der feste Ort konnte nicht aufgelöst werden.');
+  }
+
+  const payload = (await response.json()) as OpenMeteoGeocodingResponse;
+  const match = payload.results?.find(
+    (result) => Number.isFinite(result.latitude) && Number.isFinite(result.longitude),
+  );
+
+  if (!match || typeof match.latitude !== 'number' || typeof match.longitude !== 'number') {
+    throw new Error('Der feste Ort wurde nicht gefunden.');
+  }
+
+  const parts = [match.name, match.admin1, match.country].filter(
+    (value, index, values): value is string => typeof value === 'string' && value.length > 0 && values.indexOf(value) === index,
+  );
+
+  return {
+    label: parts.length > 0 ? parts.join(', ') : query,
+    latitude: match.latitude,
+    longitude: match.longitude,
+  };
+}
+
 function getAirQualityUrl(latitude: number, longitude: number) {
   const params = new URLSearchParams({
     current:
@@ -335,7 +395,7 @@ function getOutsideStatus(aqi: number | null, uvIndex: number | null, pollen: nu
   if (airIsBad || uvIsBad || pollenIsBad) {
     return {
       status: 'Lieber kurz warten',
-      summary: 'Eine Bedingung draußen ist gerade ungünstig.',
+      summary: 'Eine Bedingung draussen ist gerade ungünstig.',
       tone: 'bad' as const,
     };
   }
@@ -347,13 +407,13 @@ function getOutsideStatus(aqi: number | null, uvIndex: number | null, pollen: nu
   if (airNeedsCare || uvNeedsCare || pollenNeedsCare) {
     return {
       status: 'Gut mit Einschränkung',
-      summary: 'Draußen passt es, aber ein Wert braucht Aufmerksamkeit.',
+      summary: 'Draussen passt es, aber ein Wert braucht Aufmerksamkeit.',
       tone: 'watch' as const,
     };
   }
 
   return {
-    status: 'Gut draußen',
+    status: 'Gut draussen',
     summary: 'Luft, UV und Pollen wirken unauffällig.',
     tone: 'good' as const,
   };
@@ -376,7 +436,7 @@ async function fetchOutsideData(latitude: number, longitude: number): Promise<Ou
   const response = await fetch(getAirQualityUrl(latitude, longitude));
 
   if (!response.ok) {
-    throw new Error(`Außendaten antworten mit Status ${response.status}.`);
+    throw new Error(`Aussendaten antworten mit Status ${response.status}.`);
   }
 
   const payload = (await response.json()) as AirQualityResponse;
@@ -431,7 +491,7 @@ function getRoadStatus(
     return {
       score,
       status: 'Viel los',
-      summary: 'Plane etwas mehr Zeit ein. In der Nähe gibt es viele Straßensignale.',
+      summary: 'Plane etwas mehr Zeit ein. In der Nähe gibt es viele Strassensignale.',
       tone: 'busy' as const,
     };
   }
@@ -448,7 +508,7 @@ function getRoadStatus(
   return {
     score,
     status: 'Sehr ruhig',
-    summary: 'Keine Baustellen, Sperren oder starken Straßensignale in der Nähe.',
+    summary: 'Keine Baustellen, Sperren oder starken Strassensignale in der Nähe.',
     tone: 'clear' as const,
   };
 }
@@ -469,7 +529,7 @@ async function fetchRoadActivity(latitude: number, longitude: number): Promise<R
   });
 
   if (!response.ok) {
-    throw new Error(`Straßendaten antworten mit Status ${response.status}.`);
+    throw new Error(`Strassendaten antworten mit Status ${response.status}.`);
   }
 
   const payload = (await response.json()) as OverpassResponse;
@@ -523,7 +583,7 @@ async function fetchRoadActivity(latitude: number, longitude: number): Promise<R
 function createRoadUnavailableData(
   latitude: number,
   longitude: number,
-  reason = 'Straßendaten wurden noch nicht geladen.',
+  reason = 'Strassendaten wurden noch nicht geladen.',
 ): RoadData {
   return {
     checkedAt: new Date().toISOString(),
@@ -535,13 +595,13 @@ function createRoadUnavailableData(
     roadCount: 0,
     score: 0,
     signalCount: 0,
-    status: 'Straßendaten fehlen',
+    status: 'Strassendaten fehlen',
     summary: reason,
     tone: 'moderate',
   };
 }
 
-function createOutsideUnavailableData(reason = 'Außendaten wurden noch nicht geladen.'): OutsideData {
+function createOutsideUnavailableData(reason = 'Aussendaten wurden noch nicht geladen.'): OutsideData {
   return {
     aqi: null,
     pm25: null,
@@ -568,15 +628,15 @@ function getRoadFactors(roads: RoadData) {
         : 'Viele geregelte Kreuzungen';
   const mainRoads =
     roads.majorRoadCount === 0
-      ? 'Abseits großer Straßen'
+      ? 'Abseits grosser Strassen'
       : roads.majorRoadCount < 4
-        ? 'Ein paar Hauptstraßen nah'
-        : 'Hauptstraßen direkt nah';
+        ? 'Ein paar Hauptstrassen nah'
+        : 'Hauptstrassen direkt nah';
 
   return [
     { label: 'Baustellen', value: roadworks },
     { label: 'Kreuzungen', value: controls },
-    { label: 'Hauptstraßen', value: mainRoads },
+    { label: 'Hauptstrassen', value: mainRoads },
   ];
 }
 
@@ -901,7 +961,7 @@ function SettingsMenu({
             <View style={styles.settingsHeader}>
               <Text style={styles.settingsTitle}>Einstellungen</Text>
               <Pressable accessibilityRole="button" onPress={onClose} style={styles.closeButton}>
-                <Text style={styles.closeButtonText}>Schließen</Text>
+                <Text style={styles.closeButtonText}>Schliessen</Text>
               </Pressable>
             </View>
 
@@ -1004,7 +1064,7 @@ function OutsidePage({
         onOpenSettings={onOpenSettings}
         scrollY={scrollY}
         styles={styles}
-        title="Draußen"
+        title="Draussen"
         viewportHeight={viewportHeight}
       />
       <SummaryBlock
@@ -1115,7 +1175,7 @@ function RoadsPage({
         onOpenSettings={onOpenSettings}
         scrollY={scrollY}
         styles={styles}
-        title="Straßen"
+        title="Strassen"
         viewportHeight={viewportHeight}
       />
       <SummaryBlock
@@ -1252,18 +1312,11 @@ export default function App() {
       const fixedText = (config?.fixedLocationText ?? fixedLocationText).trim();
 
       if (useFixed && fixedText.length > 0) {
-        const results = await Location.geocodeAsync(fixedText);
-        const match = results.find(
-          (result) => Number.isFinite(result.latitude) && Number.isFinite(result.longitude),
-        );
-
-        if (!match) {
-          throw new Error('Der feste Ort wurde nicht gefunden.');
-        }
+        const match = await geocodeFixedLocation(fixedText);
 
         return {
           kind: 'fixed',
-          label: fixedText,
+          label: match.label,
           latitude: match.latitude,
           longitude: match.longitude,
         };
@@ -1352,13 +1405,13 @@ export default function App() {
           roadsResult.status === 'rejected'
             ? roadsResult.reason instanceof Error
               ? roadsResult.reason.message
-              : 'Straßendaten konnten nicht geladen werden.'
+              : 'Strassendaten konnten nicht geladen werden.'
             : null;
         const outsideSyncError =
           outsideResult.status === 'rejected'
             ? outsideResult.reason instanceof Error
               ? outsideResult.reason.message
-              : 'Außendaten konnten nicht geladen werden.'
+              : 'Aussendaten konnten nicht geladen werden.'
             : null;
         const nextRoads =
           roadsResult.status === 'fulfilled'

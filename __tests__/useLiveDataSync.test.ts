@@ -208,16 +208,46 @@ describe('useLiveDataSync', () => {
 
     expect(result.current.locationSource).toEqual({
       kind: 'fixed',
-      label: 'Bern, Schweiz',
-      latitude: 46.948,
-      longitude: 7.4474,
+      label: 'Zürich, Schweiz',
+      latitude: 47.3769,
+      longitude: 8.5417,
     });
-    expect(mockedDataService.geocodeFixedLocation).toHaveBeenCalledWith('Zürich, Schweiz');
-    expect(mockedDataService.fetchWeather).toHaveBeenCalledWith(46.948, 7.4474);
+    expect(mockedDataService.geocodeFixedLocation).not.toHaveBeenCalled();
+    expect(mockedDataService.fetchWeather).toHaveBeenCalledWith(47.3769, 8.5417);
     expect(result.current.weather).toEqual(sampleWeather);
     expect(result.current.errorMessage).toBeNull();
 
     await unmountAsync();
+  });
+
+  it('shows an error instead of staying in loading when fixed geocoding gets stuck', async () => {
+    jest.useFakeTimers();
+    mockedAsyncStorage.getItem.mockResolvedValueOnce(
+      JSON.stringify({
+        fixedLocationEnabled: true,
+        fixedLocationText: 'Basel',
+      }),
+    );
+    mockedDataService.geocodeFixedLocation.mockReturnValueOnce(new Promise(() => {}));
+
+    const { result, unmountAsync } = await renderHookAsync(
+      () =>
+        useLiveDataSync({
+          onThemeModeLoaded: jest.fn(),
+          themeMode: 'system',
+        }),
+      { concurrentRoot: false },
+    );
+
+    await act(async () => {
+      jest.advanceTimersByTime(12000);
+    });
+
+    await waitFor(() => expect(result.current.phase).toBe('error'));
+    expect(result.current.errorMessage).toBe('Der feste Ort konnte nicht rechtzeitig aufgelöst werden.');
+
+    await unmountAsync();
+    jest.useRealTimers();
   });
 
   it('applies changed location settings and updates the user message', async () => {

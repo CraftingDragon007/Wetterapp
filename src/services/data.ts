@@ -20,6 +20,24 @@ import type {
   WeatherData,
 } from '../types';
 
+const NATIVE_GEOCODER_TIMEOUT_MS = 1500;
+
+function withTimeout<T>(promise: Promise<T>, timeoutMs: number): Promise<T> {
+  let timeoutId: ReturnType<typeof setTimeout> | null = null;
+
+  const timeoutPromise = new Promise<never>((_, reject) => {
+    timeoutId = setTimeout(() => {
+      reject(new Error('Native geocoder timed out.'));
+    }, timeoutMs);
+  });
+
+  return Promise.race([promise, timeoutPromise]).finally(() => {
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
+  }) as Promise<T>;
+}
+
 function getWeatherUrl(latitude: number, longitude: number) {
   const params = new URLSearchParams({
     current:
@@ -67,13 +85,16 @@ export async function fetchWeather(latitude: number, longitude: number): Promise
 
 export async function geocodeFixedLocation(query: string) {
   try {
-    const results = await Location.geocodeAsync(query);
+    const results = await withTimeout(Location.geocodeAsync(query), NATIVE_GEOCODER_TIMEOUT_MS);
     const match = results.find(
       (result) => Number.isFinite(result.latitude) && Number.isFinite(result.longitude),
     );
 
     if (match) {
-      const resolvedLabel = await getLiveLocationLabel(match.latitude, match.longitude);
+      const resolvedLabel = await withTimeout(
+        getLiveLocationLabel(match.latitude, match.longitude),
+        NATIVE_GEOCODER_TIMEOUT_MS,
+      ).catch(() => null);
 
       return {
         label: resolvedLabel ?? query,

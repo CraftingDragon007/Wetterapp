@@ -120,6 +120,36 @@ describe('data service', () => {
     });
   });
 
+  it('falls back to web geocoding when native geocoding gets stuck', async () => {
+    jest.useFakeTimers();
+    mockedLocation.geocodeAsync.mockReturnValueOnce(new Promise(() => {}) as never);
+    fetchMock.mockResolvedValueOnce(
+      jsonResponse({
+        results: [
+          {
+            admin1: 'Bern',
+            country: 'Schweiz',
+            latitude: 46.948,
+            longitude: 7.4474,
+            name: 'Bern',
+          },
+        ],
+      }),
+    );
+
+    const resultPromise = geocodeFixedLocation('Bern');
+
+    jest.advanceTimersByTime(1500);
+    await Promise.resolve();
+
+    await expect(resultPromise).resolves.toEqual({
+      label: 'Bern, Schweiz',
+      latitude: 46.948,
+      longitude: 7.4474,
+    });
+    jest.useRealTimers();
+  });
+
   it('falls back to web reverse geocoding when the device has no reverse geocoder', async () => {
     mockedLocation.reverseGeocodeAsync.mockRejectedValueOnce(new Error('native unavailable'));
     fetchMock.mockResolvedValueOnce(

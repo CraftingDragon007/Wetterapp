@@ -5,6 +5,7 @@ import { AppState, Linking } from 'react-native';
 
 import {
   DATA_SYNC_MS,
+  DEFAULT_FIXED_LOCATION,
   DEFAULT_FIXED_LOCATION_TEXT,
   LOCATION_RETRY_MS,
   PREFERENCES_KEY,
@@ -32,17 +33,7 @@ import type {
 
 type SyncMode = 'initial' | 'background';
 const REQUEST_TIMEOUT_MS = 12000;
-
-async function resolveFixedLocationSource(query: string): Promise<LocationSource> {
-  const match = await geocodeFixedLocation(query);
-
-  return {
-    kind: 'fixed',
-    label: match.label,
-    latitude: match.latitude,
-    longitude: match.longitude,
-  };
-}
+const FALLBACK_LOCATION_TIMEOUT_MS = 4000;
 
 function withTimeout<T>(promise: Promise<T>, timeoutMs: number, message: string): Promise<T> {
   let timeoutId: ReturnType<typeof setTimeout> | null = null;
@@ -58,6 +49,33 @@ function withTimeout<T>(promise: Promise<T>, timeoutMs: number, message: string)
       clearTimeout(timeoutId);
     }
   }) as Promise<T>;
+}
+
+async function resolveFixedLocationSource(query: string): Promise<LocationSource> {
+  const match = await geocodeFixedLocation(query);
+
+  return {
+    kind: 'fixed',
+    label: match.label,
+    latitude: match.latitude,
+    longitude: match.longitude,
+  };
+}
+
+async function resolveFallbackLocationSource(fixedText: string): Promise<LocationSource> {
+  if (fixedText.length === 0 || fixedText === DEFAULT_FIXED_LOCATION_TEXT) {
+    return DEFAULT_FIXED_LOCATION;
+  }
+
+  try {
+    return await withTimeout(
+      resolveFixedLocationSource(fixedText),
+      FALLBACK_LOCATION_TIMEOUT_MS,
+      'Der feste Ort konnte nicht rechtzeitig aufgelöst werden.',
+    );
+  } catch {
+    return DEFAULT_FIXED_LOCATION;
+  }
 }
 
 type UseLiveDataSyncParams = {
@@ -110,13 +128,17 @@ export function useLiveDataSync({ onThemeModeLoaded, themeMode }: UseLiveDataSyn
       const fixedText = (config?.fixedLocationText ?? fixedLocationText).trim();
 
       if (useFixed && fixedText.length > 0) {
-        return resolveFixedLocationSource(fixedText);
+        return withTimeout(
+          resolveFixedLocationSource(fixedText),
+          REQUEST_TIMEOUT_MS,
+          'Der feste Ort konnte nicht rechtzeitig aufgelöst werden.',
+        );
       }
 
       const servicesEnabled = await Location.hasServicesEnabledAsync();
 
       if (!servicesEnabled) {
-        return resolveFixedLocationSource(fixedText || DEFAULT_FIXED_LOCATION_TEXT);
+        return resolveFallbackLocationSource(fixedText);
       }
 
       const existingPermission = await Location.getForegroundPermissionsAsync();
@@ -128,7 +150,7 @@ export function useLiveDataSync({ onThemeModeLoaded, themeMode }: UseLiveDataSyn
       }
 
       if (permission.status !== Location.PermissionStatus.GRANTED) {
-        return resolveFixedLocationSource(fixedText || DEFAULT_FIXED_LOCATION_TEXT);
+        return resolveFallbackLocationSource(fixedText);
       }
 
       const location = await Location.getCurrentPositionAsync({

@@ -126,6 +126,10 @@ describe('App', () => {
     ).toMatchSnapshot();
   });
 
+  it('matches snapshot for the ready state', () => {
+    expect(renderSnapshot()).toMatchSnapshot();
+  });
+
   it('renders the error state and retries the initial sync', () => {
     const syncData = jest.fn();
     mockedUseLiveDataSync.mockReturnValue(

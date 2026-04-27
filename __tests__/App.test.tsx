@@ -130,6 +130,49 @@ describe('App', () => {
     expect(renderSnapshot()).toMatchSnapshot();
   });
 
+  it('matches snapshot for the error state', () => {
+    expect(
+      renderSnapshot({
+        errorMessage: 'Netzwerkfehler',
+        outside: null,
+        phase: 'error',
+        roads: null,
+        weather: null,
+      }),
+    ).toMatchSnapshot();
+  });
+
+  it('matches snapshot for the permission-blocked state', () => {
+    expect(
+      renderSnapshot({
+        phase: 'permission-blocked',
+      }),
+    ).toMatchSnapshot();
+  });
+
+  it('matches snapshot with the settings drawer open', async () => {
+    mockedUseLiveDataSync.mockReturnValue(
+      createHookState({
+        draftFixedLocationEnabled: true,
+        draftFixedLocationText: 'Bern, Schweiz',
+        locationSource: {
+          kind: 'fixed',
+          label: 'Fester Ort: Bern, CH',
+          latitude: 46.948,
+          longitude: 7.4474,
+        },
+        settingsMessage: 'Fester Ort aktiv.',
+      }),
+    );
+
+    const view = render(<App />);
+
+    fireEvent.press(screen.getByTestId('weather-settings-open-button'));
+
+    await waitFor(() => expect(screen.getByTestId('settings-menu')).toBeTruthy());
+    expect(view.toJSON()).toMatchSnapshot();
+  });
+
   it('renders the error state and retries the initial sync', () => {
     const syncData = jest.fn();
     mockedUseLiveDataSync.mockReturnValue(

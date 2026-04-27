@@ -1,0 +1,1832 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App matches snapshot for the loading state 1`] = `
+<View>
+  <View
+    edges={
+      [
+        "left",
+        "right",
+      ]
+    }
+    onMoveShouldSetResponder={[Function]}
+    onMoveShouldSetResponderCapture={[Function]}
+    onResponderEnd={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderReject={[Function]}
+    onResponderRelease={[Function]}
+    onResponderStart={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    onStartShouldSetResponderCapture={[Function]}
+    style={
+      {
+        "backgroundColor": "#f4f6f1",
+        "flex": 1,
+        "overflow": "hidden",
+      }
+    }
+  >
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "backgroundColor": "#f4f6f1",
+          "flex": 1,
+          "justifyContent": "center",
+          "padding": 24,
+        }
+      }
+    >
+      <ActivityIndicator
+        color="#167248"
+        size="large"
+      />
+      <Text
+        style={
+          {
+            "color": "#667066",
+            "fontSize": 15,
+            "marginTop": 16,
+          }
+        }
+      >
+        Daten werden geladen
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`App matches snapshot for the ready state 1`] = `
+<View>
+  <View
+    edges={
+      [
+        "left",
+        "right",
+      ]
+    }
+    onLayout={[Function]}
+    onMoveShouldSetResponder={[Function]}
+    onMoveShouldSetResponderCapture={[Function]}
+    onResponderEnd={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderReject={[Function]}
+    onResponderRelease={[Function]}
+    onResponderStart={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    onStartShouldSetResponderCapture={[Function]}
+    style={
+      {
+        "backgroundColor": "#f4f6f1",
+        "flex": 1,
+        "overflow": "hidden",
+      }
+    }
+  >
+    <RCTScrollView
+      bounces={false}
+      collapsable={false}
+      contentContainerStyle={
+        {
+          "backgroundColor": "#f4f6f1",
+        }
+      }
+      decelerationRate="fast"
+      onScroll={[Function]}
+      overScrollMode="never"
+      pagingEnabled={true}
+      scrollEventThrottle={16}
+      showsVerticalScrollIndicator={false}
+      snapToInterval={1334}
+    >
+      <View>
+        <View
+          style={
+            [
+              {
+                "backgroundColor": "#f4f6f1",
+                "paddingHorizontal": 24,
+                "width": "100%",
+              },
+              {
+                "paddingBottom": 34,
+                "paddingTop": 34,
+              },
+              {
+                "height": 1334,
+              },
+            ]
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              {
+                "flex": 1,
+                "opacity": 0,
+                "transform": [
+                  {
+                    "translateY": 10,
+                  },
+                ],
+              }
+            }
+          >
+            <View
+              collapsable={false}
+              style={
+                {
+                  "flex": 1,
+                  "justifyContent": "space-between",
+                  "opacity": 0.62,
+                  "transform": [
+                    {
+                      "translateY": -14,
+                    },
+                  ],
+                  "width": "100%",
+                }
+              }
+            >
+              <View
+                style={
+                  {
+                    "alignItems": "center",
+                    "flexDirection": "row",
+                    "justifyContent": "space-between",
+                  }
+                }
+              >
+                <View
+                  style={
+                    {
+                      "flex": 1,
+                      "paddingRight": 12,
+                    }
+                  }
+                >
+                  <Text
+                    style={
+                      {
+                        "color": "#111714",
+                        "fontSize": 30,
+                        "fontWeight": "800",
+                      }
+                    }
+                  >
+                    Draussen
+                  </Text>
+                  <Text
+                    style={
+                      {
+                        "color": "#667066",
+                        "fontSize": 13,
+                        "fontWeight": "700",
+                        "marginTop": 4,
+                      }
+                    }
+                  >
+                    Aktueller Standort: Zürich, CH
+                  </Text>
+                </View>
+                <View
+                  style={
+                    {
+                      "alignItems": "center",
+                      "flexDirection": "row",
+                      "gap": 12,
+                    }
+                  }
+                >
+                  <View
+                    accessibilityLabel="Einstellungen öffnen"
+                    accessibilityRole="button"
+                    accessibilityState={
+                      {
+                        "busy": undefined,
+                        "checked": undefined,
+                        "disabled": undefined,
+                        "expanded": undefined,
+                        "selected": undefined,
+                      }
+                    }
+                    accessibilityValue={
+                      {
+                        "max": undefined,
+                        "min": undefined,
+                        "now": undefined,
+                        "text": undefined,
+                      }
+                    }
+                    accessible={true}
+                    collapsable={false}
+                    focusable={true}
+                    hitSlop={10}
+                    onBlur={[Function]}
+                    onClick={[Function]}
+                    onFocus={[Function]}
+                    onResponderGrant={[Function]}
+                    onResponderMove={[Function]}
+                    onResponderRelease={[Function]}
+                    onResponderTerminate={[Function]}
+                    onResponderTerminationRequest={[Function]}
+                    onStartShouldSetResponder={[Function]}
+                    style={
+                      {
+                        "alignItems": "center",
+                        "backgroundColor": "#ffffff",
+                        "borderColor": "#d7ded4",
+                        "borderRadius": 10,
+                        "borderWidth": 1,
+                        "height": 34,
+                        "justifyContent": "center",
+                        "width": 34,
+                      }
+                    }
+                    testID="outside-settings-open-button"
+                  >
+                    <View
+                      style={
+                        {
+                          "gap": 4,
+                          "width": 16,
+                        }
+                      }
+                    >
+                      <View
+                        style={
+                          {
+                            "height": 4,
+                            "justifyContent": "center",
+                            "position": "relative",
+                          }
+                        }
+                      >
+                        <View
+                          style={
+                            {
+                              "backgroundColor": "#667066",
+                              "borderRadius": 1,
+                              "height": 2,
+                              "width": "100%",
+                            }
+                          }
+                        />
+                        <View
+                          style={
+                            [
+                              {
+                                "backgroundColor": "#167248",
+                                "borderRadius": 2,
+                                "height": 4,
+                                "position": "absolute",
+                                "top": 0,
+                                "width": 4,
+                              },
+                              {
+                                "left": 1,
+                              },
+                            ]
+                          }
+                        />
+                      </View>
+                      <View
+                        style={
+                          {
+                            "height": 4,
+                            "justifyContent": "center",
+                            "position": "relative",
+                          }
+                        }
+                      >
+                        <View
+                          style={
+                            {
+                              "backgroundColor": "#667066",
+                              "borderRadius": 1,
+                              "height": 2,
+                              "width": "100%",
+                            }
+                          }
+                        />
+                        <View
+                          style={
+                            [
+                              {
+                                "backgroundColor": "#167248",
+                                "borderRadius": 2,
+                                "height": 4,
+                                "position": "absolute",
+                                "top": 0,
+                                "width": 4,
+                              },
+                              {
+                                "left": 4,
+                              },
+                            ]
+                          }
+                        />
+                      </View>
+                      <View
+                        style={
+                          {
+                            "height": 4,
+                            "justifyContent": "center",
+                            "position": "relative",
+                          }
+                        }
+                      >
+                        <View
+                          style={
+                            {
+                              "backgroundColor": "#667066",
+                              "borderRadius": 1,
+                              "height": 2,
+                              "width": "100%",
+                            }
+                          }
+                        />
+                        <View
+                          style={
+                            [
+                              {
+                                "backgroundColor": "#167248",
+                                "borderRadius": 2,
+                                "height": 4,
+                                "position": "absolute",
+                                "top": 0,
+                                "width": 4,
+                              },
+                              {
+                                "left": 9,
+                              },
+                            ]
+                          }
+                        />
+                      </View>
+                    </View>
+                  </View>
+                  <View
+                    style={
+                      {
+                        "alignItems": "center",
+                        "flexDirection": "row",
+                        "gap": 6,
+                        "height": 6,
+                        "position": "relative",
+                      }
+                    }
+                  >
+                    <View
+                      style={
+                        {
+                          "backgroundColor": "#d7ded4",
+                          "borderRadius": 3,
+                          "height": 6,
+                          "width": 22,
+                        }
+                      }
+                    />
+                    <View
+                      style={
+                        {
+                          "backgroundColor": "#d7ded4",
+                          "borderRadius": 3,
+                          "height": 6,
+                          "width": 22,
+                        }
+                      }
+                    />
+                    <View
+                      style={
+                        {
+                          "backgroundColor": "#d7ded4",
+                          "borderRadius": 3,
+                          "height": 6,
+                          "width": 22,
+                        }
+                      }
+                    />
+                    <View
+                      collapsable={false}
+                      pointerEvents="none"
+                      style={
+                        {
+                          "backgroundColor": "#167248",
+                          "borderRadius": 3,
+                          "height": 6,
+                          "left": 0,
+                          "position": "absolute",
+                          "top": 0,
+                          "transform": [
+                            {
+                              "translateX": 28,
+                            },
+                          ],
+                          "width": 22,
+                          "zIndex": 1,
+                        }
+                      }
+                    />
+                  </View>
+                </View>
+              </View>
+              <View
+                style={
+                  {
+                    "backgroundColor": "#ffffff",
+                    "borderColor": "#d7ded4",
+                    "borderRadius": 8,
+                    "borderWidth": 1,
+                    "padding": 16,
+                  }
+                }
+              >
+                <View
+                  style={
+                    {
+                      "alignItems": "center",
+                      "flexDirection": "row",
+                      "gap": 9,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      [
+                        {
+                          "borderRadius": 4,
+                          "height": 12,
+                          "width": 12,
+                        },
+                        {
+                          "backgroundColor": "#167248",
+                        },
+                      ]
+                    }
+                  />
+                  <Text
+                    style={
+                      {
+                        "color": "#111714",
+                        "flex": 1,
+                        "fontSize": 21,
+                        "fontWeight": "800",
+                      }
+                    }
+                  >
+                    Gut draussen
+                  </Text>
+                </View>
+                <Text
+                  style={
+                    {
+                      "color": "#667066",
+                      "fontSize": 15,
+                      "lineHeight": 22,
+                      "marginTop": 8,
+                    }
+                  }
+                >
+                  Luft, UV und Pollen wirken unauffällig.
+                </Text>
+              </View>
+              <View
+                style={
+                  {
+                    "borderTopColor": "#d7ded4",
+                    "borderTopWidth": 1,
+                  }
+                }
+              >
+                <View
+                  style={
+                    {
+                      "alignItems": "center",
+                      "borderBottomColor": "#d7ded4",
+                      "borderBottomWidth": 1,
+                      "flexDirection": "row",
+                      "gap": 16,
+                      "justifyContent": "space-between",
+                      "minHeight": 58,
+                      "paddingVertical": 13,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      {
+                        "flex": 1,
+                      }
+                    }
+                  >
+                    <Text
+                      style={
+                        {
+                          "color": "#667066",
+                          "fontSize": 14,
+                        }
+                      }
+                    >
+                      UV
+                    </Text>
+                    <Text
+                      style={
+                        {
+                          "color": "#667066",
+                          "fontSize": 12,
+                          "marginTop": 3,
+                        }
+                      }
+                    >
+                      Index 2,0
+                    </Text>
+                  </View>
+                  <Text
+                    style={
+                      {
+                        "color": "#111714",
+                        "flexShrink": 1,
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "textAlign": "right",
+                      }
+                    }
+                  >
+                    Niedrig
+                  </Text>
+                </View>
+                <View
+                  style={
+                    {
+                      "alignItems": "center",
+                      "borderBottomColor": "#d7ded4",
+                      "borderBottomWidth": 1,
+                      "flexDirection": "row",
+                      "gap": 16,
+                      "justifyContent": "space-between",
+                      "minHeight": 58,
+                      "paddingVertical": 13,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      {
+                        "flex": 1,
+                      }
+                    }
+                  >
+                    <Text
+                      style={
+                        {
+                          "color": "#667066",
+                          "fontSize": 14,
+                        }
+                      }
+                    >
+                      Luft
+                    </Text>
+                    <Text
+                      style={
+                        {
+                          "color": "#667066",
+                          "fontSize": 12,
+                          "marginTop": 3,
+                        }
+                      }
+                    >
+                      AQI 41
+                    </Text>
+                  </View>
+                  <Text
+                    style={
+                      {
+                        "color": "#111714",
+                        "flexShrink": 1,
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "textAlign": "right",
+                      }
+                    }
+                  >
+                    Sauber
+                  </Text>
+                </View>
+                <View
+                  style={
+                    {
+                      "alignItems": "center",
+                      "borderBottomColor": "#d7ded4",
+                      "borderBottomWidth": 1,
+                      "flexDirection": "row",
+                      "gap": 16,
+                      "justifyContent": "space-between",
+                      "minHeight": 58,
+                      "paddingVertical": 13,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      {
+                        "flex": 1,
+                      }
+                    }
+                  >
+                    <Text
+                      style={
+                        {
+                          "color": "#667066",
+                          "fontSize": 14,
+                        }
+                      }
+                    >
+                      Pollen
+                    </Text>
+                    <Text
+                      style={
+                        {
+                          "color": "#667066",
+                          "fontSize": 12,
+                          "marginTop": 3,
+                        }
+                      }
+                    >
+                      Spitze 4
+                    </Text>
+                  </View>
+                  <Text
+                    style={
+                      {
+                        "color": "#111714",
+                        "flexShrink": 1,
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "textAlign": "right",
+                      }
+                    }
+                  >
+                    Niedrig
+                  </Text>
+                </View>
+                <View
+                  style={
+                    {
+                      "alignItems": "center",
+                      "borderBottomColor": "#d7ded4",
+                      "borderBottomWidth": 1,
+                      "flexDirection": "row",
+                      "gap": 16,
+                      "justifyContent": "space-between",
+                      "minHeight": 58,
+                      "paddingVertical": 13,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      {
+                        "flex": 1,
+                      }
+                    }
+                  >
+                    <Text
+                      style={
+                        {
+                          "color": "#667066",
+                          "fontSize": 14,
+                        }
+                      }
+                    >
+                      PM2.5
+                    </Text>
+                    <Text
+                      style={
+                        {
+                          "color": "#667066",
+                          "fontSize": 12,
+                          "marginTop": 3,
+                        }
+                      }
+                    >
+                      Feinstaub
+                    </Text>
+                  </View>
+                  <Text
+                    style={
+                      {
+                        "color": "#111714",
+                        "flexShrink": 1,
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "textAlign": "right",
+                      }
+                    }
+                  >
+                    8,2 µg/m³
+                  </Text>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+        <View
+          style={
+            [
+              {
+                "backgroundColor": "#f4f6f1",
+                "paddingHorizontal": 24,
+                "width": "100%",
+              },
+              {
+                "paddingBottom": 34,
+                "paddingTop": 34,
+              },
+              {
+                "height": 1334,
+              },
+            ]
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              {
+                "flex": 1,
+                "opacity": 0,
+                "transform": [
+                  {
+                    "translateY": 10,
+                  },
+                ],
+              }
+            }
+          >
+            <View
+              collapsable={false}
+              style={
+                {
+                  "flex": 1,
+                  "justifyContent": "space-between",
+                  "opacity": 1,
+                  "transform": [
+                    {
+                      "translateY": 0,
+                    },
+                  ],
+                  "width": "100%",
+                }
+              }
+            >
+              <View
+                style={
+                  {
+                    "alignItems": "center",
+                    "flexDirection": "row",
+                    "justifyContent": "space-between",
+                  }
+                }
+              >
+                <View
+                  style={
+                    {
+                      "flex": 1,
+                      "paddingRight": 12,
+                    }
+                  }
+                >
+                  <Text
+                    style={
+                      {
+                        "color": "#111714",
+                        "fontSize": 30,
+                        "fontWeight": "800",
+                      }
+                    }
+                  >
+                    Wetter
+                  </Text>
+                  <Text
+                    style={
+                      {
+                        "color": "#667066",
+                        "fontSize": 13,
+                        "fontWeight": "700",
+                        "marginTop": 4,
+                      }
+                    }
+                  >
+                    Aktueller Standort: Zürich, CH
+                  </Text>
+                </View>
+                <View
+                  style={
+                    {
+                      "alignItems": "center",
+                      "flexDirection": "row",
+                      "gap": 12,
+                    }
+                  }
+                >
+                  <View
+                    accessibilityLabel="Einstellungen öffnen"
+                    accessibilityRole="button"
+                    accessibilityState={
+                      {
+                        "busy": undefined,
+                        "checked": undefined,
+                        "disabled": undefined,
+                        "expanded": undefined,
+                        "selected": undefined,
+                      }
+                    }
+                    accessibilityValue={
+                      {
+                        "max": undefined,
+                        "min": undefined,
+                        "now": undefined,
+                        "text": undefined,
+                      }
+                    }
+                    accessible={true}
+                    collapsable={false}
+                    focusable={true}
+                    hitSlop={10}
+                    onBlur={[Function]}
+                    onClick={[Function]}
+                    onFocus={[Function]}
+                    onResponderGrant={[Function]}
+                    onResponderMove={[Function]}
+                    onResponderRelease={[Function]}
+                    onResponderTerminate={[Function]}
+                    onResponderTerminationRequest={[Function]}
+                    onStartShouldSetResponder={[Function]}
+                    style={
+                      {
+                        "alignItems": "center",
+                        "backgroundColor": "#ffffff",
+                        "borderColor": "#d7ded4",
+                        "borderRadius": 10,
+                        "borderWidth": 1,
+                        "height": 34,
+                        "justifyContent": "center",
+                        "width": 34,
+                      }
+                    }
+                    testID="weather-settings-open-button"
+                  >
+                    <View
+                      style={
+                        {
+                          "gap": 4,
+                          "width": 16,
+                        }
+                      }
+                    >
+                      <View
+                        style={
+                          {
+                            "height": 4,
+                            "justifyContent": "center",
+                            "position": "relative",
+                          }
+                        }
+                      >
+                        <View
+                          style={
+                            {
+                              "backgroundColor": "#667066",
+                              "borderRadius": 1,
+                              "height": 2,
+                              "width": "100%",
+                            }
+                          }
+                        />
+                        <View
+                          style={
+                            [
+                              {
+                                "backgroundColor": "#167248",
+                                "borderRadius": 2,
+                                "height": 4,
+                                "position": "absolute",
+                                "top": 0,
+                                "width": 4,
+                              },
+                              {
+                                "left": 1,
+                              },
+                            ]
+                          }
+                        />
+                      </View>
+                      <View
+                        style={
+                          {
+                            "height": 4,
+                            "justifyContent": "center",
+                            "position": "relative",
+                          }
+                        }
+                      >
+                        <View
+                          style={
+                            {
+                              "backgroundColor": "#667066",
+                              "borderRadius": 1,
+                              "height": 2,
+                              "width": "100%",
+                            }
+                          }
+                        />
+                        <View
+                          style={
+                            [
+                              {
+                                "backgroundColor": "#167248",
+                                "borderRadius": 2,
+                                "height": 4,
+                                "position": "absolute",
+                                "top": 0,
+                                "width": 4,
+                              },
+                              {
+                                "left": 4,
+                              },
+                            ]
+                          }
+                        />
+                      </View>
+                      <View
+                        style={
+                          {
+                            "height": 4,
+                            "justifyContent": "center",
+                            "position": "relative",
+                          }
+                        }
+                      >
+                        <View
+                          style={
+                            {
+                              "backgroundColor": "#667066",
+                              "borderRadius": 1,
+                              "height": 2,
+                              "width": "100%",
+                            }
+                          }
+                        />
+                        <View
+                          style={
+                            [
+                              {
+                                "backgroundColor": "#167248",
+                                "borderRadius": 2,
+                                "height": 4,
+                                "position": "absolute",
+                                "top": 0,
+                                "width": 4,
+                              },
+                              {
+                                "left": 9,
+                              },
+                            ]
+                          }
+                        />
+                      </View>
+                    </View>
+                  </View>
+                  <View
+                    style={
+                      {
+                        "alignItems": "center",
+                        "flexDirection": "row",
+                        "gap": 6,
+                        "height": 6,
+                        "position": "relative",
+                      }
+                    }
+                  >
+                    <View
+                      style={
+                        {
+                          "backgroundColor": "#d7ded4",
+                          "borderRadius": 3,
+                          "height": 6,
+                          "width": 22,
+                        }
+                      }
+                    />
+                    <View
+                      style={
+                        {
+                          "backgroundColor": "#d7ded4",
+                          "borderRadius": 3,
+                          "height": 6,
+                          "width": 22,
+                        }
+                      }
+                    />
+                    <View
+                      style={
+                        {
+                          "backgroundColor": "#d7ded4",
+                          "borderRadius": 3,
+                          "height": 6,
+                          "width": 22,
+                        }
+                      }
+                    />
+                    <View
+                      collapsable={false}
+                      pointerEvents="none"
+                      style={
+                        {
+                          "backgroundColor": "#167248",
+                          "borderRadius": 3,
+                          "height": 6,
+                          "left": 0,
+                          "position": "absolute",
+                          "top": 0,
+                          "transform": [
+                            {
+                              "translateX": 28,
+                            },
+                          ],
+                          "width": 22,
+                          "zIndex": 1,
+                        }
+                      }
+                    />
+                  </View>
+                </View>
+              </View>
+              <View
+                style={
+                  {
+                    "gap": 10,
+                  }
+                }
+              >
+                <Text
+                  style={
+                    {
+                      "color": "#667066",
+                      "fontSize": 18,
+                      "fontWeight": "700",
+                    }
+                  }
+                >
+                  Klar
+                </Text>
+                <View
+                  style={
+                    {
+                      "alignItems": "flex-start",
+                      "flexDirection": "row",
+                      "gap": 8,
+                    }
+                  }
+                >
+                  <Text
+                    style={
+                      {
+                        "color": "#111714",
+                        "fontSize": 86,
+                        "fontWeight": "800",
+                        "lineHeight": 92,
+                      }
+                    }
+                  >
+                    20
+                  </Text>
+                  <Text
+                    style={
+                      {
+                        "color": "#667066",
+                        "fontSize": 18,
+                        "fontWeight": "800",
+                        "marginTop": 17,
+                      }
+                    }
+                  >
+                    °C
+                  </Text>
+                </View>
+              </View>
+              <View
+                style={
+                  {
+                    "borderTopColor": "#d7ded4",
+                    "borderTopWidth": 1,
+                  }
+                }
+              >
+                <View
+                  style={
+                    {
+                      "alignItems": "center",
+                      "borderBottomColor": "#d7ded4",
+                      "borderBottomWidth": 1,
+                      "flexDirection": "row",
+                      "gap": 16,
+                      "justifyContent": "space-between",
+                      "minHeight": 58,
+                      "paddingVertical": 13,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      {
+                        "flex": 1,
+                      }
+                    }
+                  >
+                    <Text
+                      style={
+                        {
+                          "color": "#667066",
+                          "fontSize": 14,
+                        }
+                      }
+                    >
+                      Gefühlt
+                    </Text>
+                  </View>
+                  <Text
+                    style={
+                      {
+                        "color": "#111714",
+                        "flexShrink": 1,
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "textAlign": "right",
+                      }
+                    }
+                  >
+                    18 °C
+                  </Text>
+                </View>
+                <View
+                  style={
+                    {
+                      "alignItems": "center",
+                      "borderBottomColor": "#d7ded4",
+                      "borderBottomWidth": 1,
+                      "flexDirection": "row",
+                      "gap": 16,
+                      "justifyContent": "space-between",
+                      "minHeight": 58,
+                      "paddingVertical": 13,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      {
+                        "flex": 1,
+                      }
+                    }
+                  >
+                    <Text
+                      style={
+                        {
+                          "color": "#667066",
+                          "fontSize": 14,
+                        }
+                      }
+                    >
+                      Feuchte
+                    </Text>
+                  </View>
+                  <Text
+                    style={
+                      {
+                        "color": "#111714",
+                        "flexShrink": 1,
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "textAlign": "right",
+                      }
+                    }
+                  >
+                    61%
+                  </Text>
+                </View>
+                <View
+                  style={
+                    {
+                      "alignItems": "center",
+                      "borderBottomColor": "#d7ded4",
+                      "borderBottomWidth": 1,
+                      "flexDirection": "row",
+                      "gap": 16,
+                      "justifyContent": "space-between",
+                      "minHeight": 58,
+                      "paddingVertical": 13,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      {
+                        "flex": 1,
+                      }
+                    }
+                  >
+                    <Text
+                      style={
+                        {
+                          "color": "#667066",
+                          "fontSize": 14,
+                        }
+                      }
+                    >
+                      Wind
+                    </Text>
+                  </View>
+                  <Text
+                    style={
+                      {
+                        "color": "#111714",
+                        "flexShrink": 1,
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "textAlign": "right",
+                      }
+                    }
+                  >
+                    13,4 km/h
+                  </Text>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+        <View
+          style={
+            [
+              {
+                "backgroundColor": "#f4f6f1",
+                "paddingHorizontal": 24,
+                "width": "100%",
+              },
+              {
+                "paddingBottom": 34,
+                "paddingTop": 34,
+              },
+              {
+                "height": 1334,
+              },
+            ]
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              {
+                "flex": 1,
+                "opacity": 0,
+                "transform": [
+                  {
+                    "translateY": 10,
+                  },
+                ],
+              }
+            }
+          >
+            <View
+              collapsable={false}
+              style={
+                {
+                  "flex": 1,
+                  "justifyContent": "space-between",
+                  "opacity": 0.62,
+                  "transform": [
+                    {
+                      "translateY": 14,
+                    },
+                  ],
+                  "width": "100%",
+                }
+              }
+            >
+              <View
+                style={
+                  {
+                    "alignItems": "center",
+                    "flexDirection": "row",
+                    "justifyContent": "space-between",
+                  }
+                }
+              >
+                <View
+                  style={
+                    {
+                      "flex": 1,
+                      "paddingRight": 12,
+                    }
+                  }
+                >
+                  <Text
+                    style={
+                      {
+                        "color": "#111714",
+                        "fontSize": 30,
+                        "fontWeight": "800",
+                      }
+                    }
+                  >
+                    Strassen
+                  </Text>
+                  <Text
+                    style={
+                      {
+                        "color": "#667066",
+                        "fontSize": 13,
+                        "fontWeight": "700",
+                        "marginTop": 4,
+                      }
+                    }
+                  >
+                    Aktueller Standort: Zürich, CH
+                  </Text>
+                </View>
+                <View
+                  style={
+                    {
+                      "alignItems": "center",
+                      "flexDirection": "row",
+                      "gap": 12,
+                    }
+                  }
+                >
+                  <View
+                    accessibilityLabel="Einstellungen öffnen"
+                    accessibilityRole="button"
+                    accessibilityState={
+                      {
+                        "busy": undefined,
+                        "checked": undefined,
+                        "disabled": undefined,
+                        "expanded": undefined,
+                        "selected": undefined,
+                      }
+                    }
+                    accessibilityValue={
+                      {
+                        "max": undefined,
+                        "min": undefined,
+                        "now": undefined,
+                        "text": undefined,
+                      }
+                    }
+                    accessible={true}
+                    collapsable={false}
+                    focusable={true}
+                    hitSlop={10}
+                    onBlur={[Function]}
+                    onClick={[Function]}
+                    onFocus={[Function]}
+                    onResponderGrant={[Function]}
+                    onResponderMove={[Function]}
+                    onResponderRelease={[Function]}
+                    onResponderTerminate={[Function]}
+                    onResponderTerminationRequest={[Function]}
+                    onStartShouldSetResponder={[Function]}
+                    style={
+                      {
+                        "alignItems": "center",
+                        "backgroundColor": "#ffffff",
+                        "borderColor": "#d7ded4",
+                        "borderRadius": 10,
+                        "borderWidth": 1,
+                        "height": 34,
+                        "justifyContent": "center",
+                        "width": 34,
+                      }
+                    }
+                    testID="roads-settings-open-button"
+                  >
+                    <View
+                      style={
+                        {
+                          "gap": 4,
+                          "width": 16,
+                        }
+                      }
+                    >
+                      <View
+                        style={
+                          {
+                            "height": 4,
+                            "justifyContent": "center",
+                            "position": "relative",
+                          }
+                        }
+                      >
+                        <View
+                          style={
+                            {
+                              "backgroundColor": "#667066",
+                              "borderRadius": 1,
+                              "height": 2,
+                              "width": "100%",
+                            }
+                          }
+                        />
+                        <View
+                          style={
+                            [
+                              {
+                                "backgroundColor": "#167248",
+                                "borderRadius": 2,
+                                "height": 4,
+                                "position": "absolute",
+                                "top": 0,
+                                "width": 4,
+                              },
+                              {
+                                "left": 1,
+                              },
+                            ]
+                          }
+                        />
+                      </View>
+                      <View
+                        style={
+                          {
+                            "height": 4,
+                            "justifyContent": "center",
+                            "position": "relative",
+                          }
+                        }
+                      >
+                        <View
+                          style={
+                            {
+                              "backgroundColor": "#667066",
+                              "borderRadius": 1,
+                              "height": 2,
+                              "width": "100%",
+                            }
+                          }
+                        />
+                        <View
+                          style={
+                            [
+                              {
+                                "backgroundColor": "#167248",
+                                "borderRadius": 2,
+                                "height": 4,
+                                "position": "absolute",
+                                "top": 0,
+                                "width": 4,
+                              },
+                              {
+                                "left": 4,
+                              },
+                            ]
+                          }
+                        />
+                      </View>
+                      <View
+                        style={
+                          {
+                            "height": 4,
+                            "justifyContent": "center",
+                            "position": "relative",
+                          }
+                        }
+                      >
+                        <View
+                          style={
+                            {
+                              "backgroundColor": "#667066",
+                              "borderRadius": 1,
+                              "height": 2,
+                              "width": "100%",
+                            }
+                          }
+                        />
+                        <View
+                          style={
+                            [
+                              {
+                                "backgroundColor": "#167248",
+                                "borderRadius": 2,
+                                "height": 4,
+                                "position": "absolute",
+                                "top": 0,
+                                "width": 4,
+                              },
+                              {
+                                "left": 9,
+                              },
+                            ]
+                          }
+                        />
+                      </View>
+                    </View>
+                  </View>
+                  <View
+                    style={
+                      {
+                        "alignItems": "center",
+                        "flexDirection": "row",
+                        "gap": 6,
+                        "height": 6,
+                        "position": "relative",
+                      }
+                    }
+                  >
+                    <View
+                      style={
+                        {
+                          "backgroundColor": "#d7ded4",
+                          "borderRadius": 3,
+                          "height": 6,
+                          "width": 22,
+                        }
+                      }
+                    />
+                    <View
+                      style={
+                        {
+                          "backgroundColor": "#d7ded4",
+                          "borderRadius": 3,
+                          "height": 6,
+                          "width": 22,
+                        }
+                      }
+                    />
+                    <View
+                      style={
+                        {
+                          "backgroundColor": "#d7ded4",
+                          "borderRadius": 3,
+                          "height": 6,
+                          "width": 22,
+                        }
+                      }
+                    />
+                    <View
+                      collapsable={false}
+                      pointerEvents="none"
+                      style={
+                        {
+                          "backgroundColor": "#167248",
+                          "borderRadius": 3,
+                          "height": 6,
+                          "left": 0,
+                          "position": "absolute",
+                          "top": 0,
+                          "transform": [
+                            {
+                              "translateX": 28,
+                            },
+                          ],
+                          "width": 22,
+                          "zIndex": 1,
+                        }
+                      }
+                    />
+                  </View>
+                </View>
+              </View>
+              <View
+                style={
+                  {
+                    "backgroundColor": "#ffffff",
+                    "borderColor": "#d7ded4",
+                    "borderRadius": 8,
+                    "borderWidth": 1,
+                    "padding": 16,
+                  }
+                }
+              >
+                <View
+                  style={
+                    {
+                      "alignItems": "center",
+                      "flexDirection": "row",
+                      "gap": 9,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      [
+                        {
+                          "borderRadius": 4,
+                          "height": 12,
+                          "width": 12,
+                        },
+                        {
+                          "backgroundColor": "#a76b13",
+                        },
+                      ]
+                    }
+                  />
+                  <Text
+                    style={
+                      {
+                        "color": "#111714",
+                        "flex": 1,
+                        "fontSize": 21,
+                        "fontWeight": "800",
+                      }
+                    }
+                  >
+                    Ganz normal
+                  </Text>
+                </View>
+                <Text
+                  style={
+                    {
+                      "color": "#667066",
+                      "fontSize": 15,
+                      "lineHeight": 22,
+                      "marginTop": 8,
+                    }
+                  }
+                >
+                  Rundherum ist etwas Bewegung, aber nichts wirkt auffällig.
+                </Text>
+                <Text
+                  style={
+                    {
+                      "color": "#667066",
+                      "fontSize": 13,
+                      "lineHeight": 18,
+                      "marginTop": 12,
+                    }
+                  }
+                >
+                  Aus Kartendaten geschätzt, keine Live-Staugeschwindigkeit.
+                </Text>
+              </View>
+              <View
+                style={
+                  {
+                    "borderTopColor": "#d7ded4",
+                    "borderTopWidth": 1,
+                  }
+                }
+              >
+                <View
+                  style={
+                    {
+                      "alignItems": "center",
+                      "borderBottomColor": "#d7ded4",
+                      "borderBottomWidth": 1,
+                      "flexDirection": "row",
+                      "gap": 16,
+                      "justifyContent": "space-between",
+                      "minHeight": 58,
+                      "paddingVertical": 13,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      {
+                        "flex": 1,
+                      }
+                    }
+                  >
+                    <Text
+                      style={
+                        {
+                          "color": "#667066",
+                          "fontSize": 14,
+                        }
+                      }
+                    >
+                      Baustellen
+                    </Text>
+                  </View>
+                  <Text
+                    style={
+                      {
+                        "color": "#111714",
+                        "flexShrink": 1,
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "textAlign": "right",
+                      }
+                    }
+                  >
+                    1 Baustelle in der Nähe
+                  </Text>
+                </View>
+                <View
+                  style={
+                    {
+                      "alignItems": "center",
+                      "borderBottomColor": "#d7ded4",
+                      "borderBottomWidth": 1,
+                      "flexDirection": "row",
+                      "gap": 16,
+                      "justifyContent": "space-between",
+                      "minHeight": 58,
+                      "paddingVertical": 13,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      {
+                        "flex": 1,
+                      }
+                    }
+                  >
+                    <Text
+                      style={
+                        {
+                          "color": "#667066",
+                          "fontSize": 14,
+                        }
+                      }
+                    >
+                      Kreuzungen
+                    </Text>
+                  </View>
+                  <Text
+                    style={
+                      {
+                        "color": "#111714",
+                        "flexShrink": 1,
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "textAlign": "right",
+                      }
+                    }
+                  >
+                    Einige geregelte Kreuzungen
+                  </Text>
+                </View>
+                <View
+                  style={
+                    {
+                      "alignItems": "center",
+                      "borderBottomColor": "#d7ded4",
+                      "borderBottomWidth": 1,
+                      "flexDirection": "row",
+                      "gap": 16,
+                      "justifyContent": "space-between",
+                      "minHeight": 58,
+                      "paddingVertical": 13,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      {
+                        "flex": 1,
+                      }
+                    }
+                  >
+                    <Text
+                      style={
+                        {
+                          "color": "#667066",
+                          "fontSize": 14,
+                        }
+                      }
+                    >
+                      Hauptstrassen
+                    </Text>
+                  </View>
+                  <Text
+                    style={
+                      {
+                        "color": "#111714",
+                        "flexShrink": 1,
+                        "fontSize": 16,
+                        "fontWeight": "700",
+                        "textAlign": "right",
+                      }
+                    }
+                  >
+                    Ein paar Hauptstrassen nah
+                  </Text>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+    </RCTScrollView>
+  </View>
+</View>
+`;

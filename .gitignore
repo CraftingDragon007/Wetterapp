@@ -40,3 +40,33 @@ coverage/
 # generated native folders
 /ios
 /android
+
+# temporary files
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+*~
+.tmp/
+tmp/
+temp/
+.cache/
+
+# editor / OS temporary files
+Thumbs.db
+Desktop.ini
+.idea/
+
+# LaTeX temporary build artifacts
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.lof
+*.lot
+*.bbl
+*.blg

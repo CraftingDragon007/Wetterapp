@@ -3,7 +3,12 @@ import * as Location from 'expo-location';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { AppState, Linking } from 'react-native';
 
-import { DATA_SYNC_MS, LOCATION_RETRY_MS, PREFERENCES_KEY } from '../constants';
+import {
+  DATA_SYNC_MS,
+  DEFAULT_FIXED_LOCATION_TEXT,
+  LOCATION_RETRY_MS,
+  PREFERENCES_KEY,
+} from '../constants';
 import { getStoredBoolean, getStoredText, normalizeThemeMode } from '../formatters';
 import {
   createOutsideUnavailableData,
@@ -27,6 +32,17 @@ import type {
 
 type SyncMode = 'initial' | 'background';
 const REQUEST_TIMEOUT_MS = 12000;
+
+async function resolveFixedLocationSource(query: string): Promise<LocationSource> {
+  const match = await geocodeFixedLocation(query);
+
+  return {
+    kind: 'fixed',
+    label: match.label,
+    latitude: match.latitude,
+    longitude: match.longitude,
+  };
+}
 
 function withTimeout<T>(promise: Promise<T>, timeoutMs: number, message: string): Promise<T> {
   let timeoutId: ReturnType<typeof setTimeout> | null = null;
@@ -94,22 +110,13 @@ export function useLiveDataSync({ onThemeModeLoaded, themeMode }: UseLiveDataSyn
       const fixedText = (config?.fixedLocationText ?? fixedLocationText).trim();
 
       if (useFixed && fixedText.length > 0) {
-        const match = await geocodeFixedLocation(fixedText);
-
-        return {
-          kind: 'fixed',
-          label: match.label,
-          latitude: match.latitude,
-          longitude: match.longitude,
-        };
+        return resolveFixedLocationSource(fixedText);
       }
 
       const servicesEnabled = await Location.hasServicesEnabledAsync();
 
       if (!servicesEnabled) {
-        const error = new Error('Standortdienste sind deaktiviert.');
-        error.name = 'LOCATION_CAN_RETRY';
-        throw error;
+        return resolveFixedLocationSource(fixedText || DEFAULT_FIXED_LOCATION_TEXT);
       }
 
       const existingPermission = await Location.getForegroundPermissionsAsync();
@@ -121,9 +128,7 @@ export function useLiveDataSync({ onThemeModeLoaded, themeMode }: UseLiveDataSyn
       }
 
       if (permission.status !== Location.PermissionStatus.GRANTED) {
-        const error = new Error('Standortfreigabe fehlt.');
-        error.name = permission.canAskAgain ? 'LOCATION_CAN_RETRY' : 'LOCATION_BLOCKED';
-        throw error;
+        return resolveFixedLocationSource(fixedText || DEFAULT_FIXED_LOCATION_TEXT);
       }
 
       const location = await Location.getCurrentPositionAsync({

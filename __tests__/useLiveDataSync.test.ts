@@ -185,7 +185,7 @@ describe('useLiveDataSync', () => {
     await unmountAsync();
   });
 
-  it('switches into the permission blocked phase when location access is denied permanently', async () => {
+  it('falls back to fixed-location data when location access is denied permanently', async () => {
     mockedLocation.getForegroundPermissionsAsync.mockResolvedValueOnce({
       canAskAgain: true,
       status: Location.PermissionStatus.DENIED,
@@ -204,9 +204,17 @@ describe('useLiveDataSync', () => {
       { concurrentRoot: false },
     );
 
-    await waitFor(() => expect(result.current.phase).toBe('permission-blocked'));
+    await waitFor(() => expect(result.current.phase).toBe('ready'));
 
-    expect(result.current.weather).toBeNull();
+    expect(result.current.locationSource).toEqual({
+      kind: 'fixed',
+      label: 'Bern, Schweiz',
+      latitude: 46.948,
+      longitude: 7.4474,
+    });
+    expect(mockedDataService.geocodeFixedLocation).toHaveBeenCalledWith('Zürich, Schweiz');
+    expect(mockedDataService.fetchWeather).toHaveBeenCalledWith(46.948, 7.4474);
+    expect(result.current.weather).toEqual(sampleWeather);
     expect(result.current.errorMessage).toBeNull();
 
     await unmountAsync();

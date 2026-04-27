@@ -11,6 +11,7 @@ export const PAGE_INDEX: Record<PageName, number> = {
 export const LOCATION_RETRY_MS = 2500;
 export const DATA_SYNC_MS = 15000;
 export const ROAD_RADIUS_METERS = 1800;
+export const DEFAULT_FIXED_LOCATION_TEXT = 'Zürich, Schweiz';
 
 export const WEATHER_ENDPOINT = 'https://api.open-meteo.com/v1/forecast';
 export const AIR_QUALITY_ENDPOINT = 'https://air-quality-api.open-meteo.com/v1/air-quality';

@@ -144,7 +144,10 @@ export function useLiveDataSync({ onThemeModeLoaded, themeMode }: UseLiveDataSyn
       const existingPermission = await Location.getForegroundPermissionsAsync();
       let permission = existingPermission;
 
-      if (existingPermission.status !== Location.PermissionStatus.GRANTED) {
+      if (
+        existingPermission.status !== Location.PermissionStatus.GRANTED &&
+        existingPermission.canAskAgain
+      ) {
         setPhase('requesting-location');
         permission = await Location.requestForegroundPermissionsAsync();
       }
@@ -172,7 +175,7 @@ export function useLiveDataSync({ onThemeModeLoaded, themeMode }: UseLiveDataSyn
     async (mode: SyncMode = 'background', sourceOverride?: SourceConfig) => {
       const isInitial = mode === 'initial' || !hasLoadedData;
 
-      if (syncInFlightRef.current && !isInitial) {
+      if (syncInFlightRef.current && !sourceOverride) {
         return;
       }
 

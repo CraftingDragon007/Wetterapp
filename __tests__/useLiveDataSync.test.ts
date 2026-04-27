@@ -41,6 +41,7 @@ jest.mock('../src/services/data', () => {
 const mockedAsyncStorage = jest.mocked(AsyncStorage);
 const mockedLocation = jest.mocked(Location);
 const mockedDataService = jest.mocked(dataService);
+let appStateChangeHandler: ((state: string) => void) | null = null;
 
 const sampleWeather = {
   apparentTemperature: 18,
@@ -110,9 +111,14 @@ describe('useLiveDataSync', () => {
       latitude: 46.948,
       longitude: 7.4474,
     });
-    jest.spyOn(AppState, 'addEventListener').mockReturnValue({
-      remove: jest.fn(),
-    } as never);
+    appStateChangeHandler = null;
+    jest.spyOn(AppState, 'addEventListener').mockImplementation((_, handler) => {
+      appStateChangeHandler = handler;
+
+      return {
+        remove: jest.fn(),
+      } as never;
+    });
   });
 
   it('loads stored preferences and performs an initial fixed-location sync', async () => {
@@ -216,6 +222,58 @@ describe('useLiveDataSync', () => {
     expect(mockedDataService.fetchWeather).toHaveBeenCalledWith(47.3769, 8.5417);
     expect(result.current.weather).toEqual(sampleWeather);
     expect(result.current.errorMessage).toBeNull();
+
+    await unmountAsync();
+  });
+
+  it('does not restart the initial sync while the permission prompt is pending', async () => {
+    let resolvePermission: (
+      value: Awaited<ReturnType<typeof Location.requestForegroundPermissionsAsync>>,
+    ) => void = () => undefined;
+
+    mockedLocation.getForegroundPermissionsAsync.mockResolvedValueOnce({
+      canAskAgain: true,
+      status: Location.PermissionStatus.DENIED,
+    } as never);
+    mockedLocation.requestForegroundPermissionsAsync.mockReturnValueOnce(
+      new Promise((resolve) => {
+        resolvePermission = resolve;
+      }) as never,
+    );
+
+    const { result, unmountAsync } = await renderHookAsync(
+      () =>
+        useLiveDataSync({
+          onThemeModeLoaded: jest.fn(),
+          themeMode: 'system',
+        }),
+      { concurrentRoot: false },
+    );
+
+    await waitFor(() => expect(result.current.phase).toBe('requesting-location'));
+
+    act(() => {
+      appStateChangeHandler?.('active');
+      appStateChangeHandler?.('active');
+    });
+
+    expect(mockedLocation.requestForegroundPermissionsAsync).toHaveBeenCalledTimes(1);
+    expect(result.current.phase).toBe('requesting-location');
+
+    await act(async () => {
+      resolvePermission({
+        canAskAgain: false,
+        status: Location.PermissionStatus.DENIED,
+      });
+    });
+
+    await waitFor(() => expect(result.current.phase).toBe('ready'));
+    expect(result.current.locationSource).toEqual({
+      kind: 'fixed',
+      label: 'Zürich, Schweiz',
+      latitude: 47.3769,
+      longitude: 8.5417,
+    });
 
     await unmountAsync();
   });

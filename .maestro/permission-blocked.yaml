@@ -1,0 +1,15 @@
+appId: ch.gamepowerx.wetterapp
+---
+- launchApp:
+    clearState: true
+    permissions:
+      all: deny
+      android.permission.ACCESS_COARSE_LOCATION: deny
+      android.permission.ACCESS_FINE_LOCATION: deny
+- extendedWaitUntil:
+    visible:
+      id: permission-open-system-settings-button
+    timeout: 15000
+- assertVisible:
+    id: permission-open-system-settings-button
+- assertVisible: "Standort-Einstellungen öffnen"

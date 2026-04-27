@@ -14,13 +14,15 @@
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "2.2.0",
-    "expo": "~55.0.15",
+    "expo": "~55.0.17",
     "expo-location": "~55.1.8",
     "expo-status-bar": "~55.0.5",
-    "expo-system-ui": "~55.0.15",
+    "expo-system-ui": "~55.0.16",
     "react": "19.2.0",
-    "react-native": "0.83.4",
-    "react-native-safe-area-context": "~5.6.2"
+    "react-dom": "19.2.0",
+    "react-native": "0.83.6",
+    "react-native-safe-area-context": "~5.6.2",
+    "react-native-web": "^0.21.0"
   },
   "devDependencies": {
     "@testing-library/react-native": "^13.3.3",

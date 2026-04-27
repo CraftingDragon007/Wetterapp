@@ -76,6 +76,12 @@ function createHookState(overrides: Partial<ReturnType<typeof useLiveDataSync>> 
   };
 }
 
+function renderSnapshot(overrides: Partial<ReturnType<typeof useLiveDataSync>> = {}) {
+  mockedUseLiveDataSync.mockReturnValue(createHookState(overrides));
+
+  return render(<App />).toJSON();
+}
+
 describe('App', () => {
   beforeEach(() => {
     jest.clearAllMocks();
@@ -107,6 +113,17 @@ describe('App', () => {
     render(<App />);
 
     expect(screen.getByText('Daten werden geladen')).toBeTruthy();
+  });
+
+  it('matches snapshot for the loading state', () => {
+    expect(
+      renderSnapshot({
+        outside: null,
+        phase: 'loading-data',
+        roads: null,
+        weather: null,
+      }),
+    ).toMatchSnapshot();
   });
 
   it('renders the error state and retries the initial sync', () => {

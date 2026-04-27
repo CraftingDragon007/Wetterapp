@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App matches snapshot for the loading state 1`] = `
+<View>
+  <View
+    edges={
+      [
+        "left",
+        "right",
+      ]
+    }
+    onMoveShouldSetResponder={[Function]}
+    onMoveShouldSetResponderCapture={[Function]}
+    onResponderEnd={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderReject={[Function]}
+    onResponderRelease={[Function]}
+    onResponderStart={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    onStartShouldSetResponderCapture={[Function]}
+    style={
+      {
+        "backgroundColor": "#f4f6f1",
+        "flex": 1,
+        "overflow": "hidden",
+      }
+    }
+  >
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "backgroundColor": "#f4f6f1",
+          "flex": 1,
+          "justifyContent": "center",
+          "padding": 24,
+        }
+      }
+    >
+      <ActivityIndicator
+        color="#167248"
+        size="large"
+      />
+      <Text
+        style={
+          {
+            "color": "#667066",
+            "fontSize": 15,
+            "marginTop": 16,
+          }
+        }
+      >
+        Daten werden geladen
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+

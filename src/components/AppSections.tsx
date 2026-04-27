@@ -5,7 +5,7 @@ import { PAGES } from '../constants';
 import { describeWeatherCode, formatNumber, getAirLabel, getPollenLabel, getUvLabel } from '../formatters';
 import { getRoadFactors } from '../services/data';
 import { getToneColor } from '../theme';
-import type { LocationSource, OutsideData, RoadData, Scheme, Theme, ThemeMode, WeatherData } from '../types';
+import type { LocationSource, OutsideData, PageName, RoadData, Scheme, Theme, ThemeMode, WeatherData } from '../types';
 import type { Styles } from '../styles';
 
 function PageIndicator({
@@ -76,6 +76,7 @@ export function PageFrame({
 function Header({
   locationLabel,
   onOpenSettings,
+  pageId,
   scrollY,
   styles,
   title,
@@ -83,6 +84,7 @@ function Header({
 }: {
   locationLabel: string;
   onOpenSettings: () => void;
+  pageId: PageName;
   scrollY: Animated.Value;
   styles: Styles;
   title: string;
@@ -101,6 +103,7 @@ function Header({
           hitSlop={10}
           onPress={onOpenSettings}
           style={styles.settingsButton}
+          testID={`${pageId}-settings-open-button`}
         >
           <View style={styles.settingsIcon}>
             <View style={styles.settingsIconRow}>
@@ -248,7 +251,7 @@ export function SettingsMenu({
   const sourceLabel = locationSource?.label ?? 'Noch nicht geladen';
 
   return (
-    <Animated.View style={[styles.settingsOverlay, { opacity }]}> 
+    <Animated.View style={[styles.settingsOverlay, { opacity }]} testID="settings-menu">
       <Pressable accessibilityRole="button" style={styles.settingsBackdrop} onPress={onClose} />
       <Animated.View
         style={[
@@ -270,7 +273,12 @@ export function SettingsMenu({
           >
             <View style={styles.settingsHeader}>
               <Text style={styles.settingsTitle}>Einstellungen</Text>
-              <Pressable accessibilityRole="button" onPress={onClose} style={styles.closeButton}>
+              <Pressable
+                accessibilityRole="button"
+                onPress={onClose}
+                style={styles.closeButton}
+                testID="close-settings-button"
+              >
                 <Text style={styles.closeButtonText}>Schliessen</Text>
               </Pressable>
             </View>
@@ -310,6 +318,7 @@ export function SettingsMenu({
                 <Switch
                   ios_backgroundColor={theme.border}
                   onValueChange={onChangeDraftFixedLocationEnabled}
+                  testID="fixed-location-switch"
                   thumbColor={Platform.OS === 'android' ? theme.surface : undefined}
                   trackColor={{ false: theme.border, true: theme.accent }}
                   value={draftFixedLocationEnabled}
@@ -325,12 +334,14 @@ export function SettingsMenu({
                 returnKeyType="done"
                 selectionColor={theme.accent}
                 style={styles.locationInput}
+                testID="fixed-location-input"
                 value={draftFixedLocationText}
               />
               <Pressable
                 accessibilityRole="button"
                 onPress={onApplyLocationSettings}
                 style={styles.secondaryButton}
+                testID="apply-location-button"
               >
                 <Text style={styles.secondaryButtonText}>Ort übernehmen</Text>
               </Pressable>
@@ -344,6 +355,7 @@ export function SettingsMenu({
                 accessibilityRole="button"
                 onPress={onOpenSystemSettings}
                 style={styles.plainButton}
+                testID="open-system-settings-button"
               >
                 <Text style={styles.plainButtonText}>Standort-Einstellungen öffnen</Text>
               </Pressable>
@@ -377,6 +389,7 @@ export function OutsidePage({
       <Header
         locationLabel={locationLabel}
         onOpenSettings={onOpenSettings}
+        pageId="outside"
         scrollY={scrollY}
         styles={styles}
         title="Draussen"
@@ -441,6 +454,7 @@ export function WeatherPage({
       <Header
         locationLabel={locationLabel}
         onOpenSettings={onOpenSettings}
+        pageId="weather"
         scrollY={scrollY}
         styles={styles}
         title="Wetter"
@@ -494,6 +508,7 @@ export function RoadsPage({
       <Header
         locationLabel={locationLabel}
         onOpenSettings={onOpenSettings}
+        pageId="roads"
         scrollY={scrollY}
         styles={styles}
         title="Strassen"

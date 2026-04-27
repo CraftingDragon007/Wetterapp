@@ -226,7 +226,11 @@ export default function App() {
         >
           <ExpoStatusBar style={scheme === 'dark' ? 'light' : 'dark'} />
           <View style={styles.centered}>
-            <Pressable style={styles.primaryButton} onPress={openSystemSettings}>
+            <Pressable
+              style={styles.primaryButton}
+              onPress={openSystemSettings}
+              testID="permission-open-system-settings-button"
+            >
               <Text style={styles.primaryButtonText}>Standort-Einstellungen öffnen</Text>
             </Pressable>
           </View>
@@ -254,7 +258,11 @@ export default function App() {
                 <Text style={styles.errorText}>
                   {errorMessage ?? 'Standortdaten konnten nicht geladen werden.'}
                 </Text>
-                <Pressable style={styles.primaryButton} onPress={() => syncData('initial')}>
+                <Pressable
+                  style={styles.primaryButton}
+                  onPress={() => syncData('initial')}
+                  testID="retry-sync-button"
+                >
                   <Text style={styles.primaryButtonText}>Erneut versuchen</Text>
                 </Pressable>
               </>

@@ -1,0 +1,27 @@
+appId: ch.gamepowerx.wetterapp
+---
+- launchApp:
+    clearState: true
+    permissions:
+      all: allow
+      location: allow
+- extendedWaitUntil:
+    visible:
+      id: weather-settings-open-button
+    timeout: 20000
+- assertVisible: "Gefühlt"
+- swipe:
+    direction: UP
+    duration: 400
+    waitToSettleTimeoutMs: 2000
+- assertVisible: "Aus Kartendaten geschätzt, keine Live-Staugeschwindigkeit."
+- swipe:
+    direction: DOWN
+    duration: 400
+    waitToSettleTimeoutMs: 2000
+- assertVisible: "Gefühlt"
+- swipe:
+    direction: DOWN
+    duration: 400
+    waitToSettleTimeoutMs: 2000
+- assertVisible: "PM2.5"

@@ -1,0 +1,32 @@
+appId: ch.gamepowerx.wetterapp
+---
+- launchApp:
+    clearState: true
+    permissions:
+      all: allow
+      location: allow
+- extendedWaitUntil:
+    visible:
+      id: weather-settings-open-button
+    timeout: 20000
+- tapOn:
+    id: weather-settings-open-button
+- waitForAnimationToEnd:
+    timeout: 5000
+- assertVisible:
+    id: settings-menu
+- tapOn:
+    id: fixed-location-switch
+- tapOn:
+    id: fixed-location-input
+- inputText: "Zuerich, Schweiz"
+- tapOn:
+    id: apply-location-button
+- assertVisible: "Fester Ort aktiv: Zuerich, Schweiz|Fester Ort aktiv: Zürich, Schweiz"
+- tapOn:
+    id: close-settings-button
+- extendedWaitUntil:
+    visible: "Wetter"
+    timeout: 15000
+- assertVisible: "Draussen"
+- assertVisible: "Strassen"

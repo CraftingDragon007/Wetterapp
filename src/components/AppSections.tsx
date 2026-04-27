@@ -5,7 +5,7 @@ import { PAGES } from '../constants';
 import { describeWeatherCode, formatNumber, getAirLabel, getPollenLabel, getUvLabel } from '../formatters';
 import { getRoadFactors } from '../services/data';
 import { getToneColor } from '../theme';
-import type { LocationSource, OutsideData, RoadData, Scheme, Theme, ThemeMode, WeatherData } from '../types';
+import type { LocationSource, OutsideData, PageName, RoadData, Scheme, Theme, ThemeMode, WeatherData } from '../types';
 import type { Styles } from '../styles';
 
 function PageIndicator({
@@ -84,7 +84,7 @@ function Header({
 }: {
   locationLabel: string;
   onOpenSettings: () => void;
-  pageId: 'outside' | 'weather' | 'roads';
+  pageId: PageName;
   scrollY: Animated.Value;
   styles: Styles;
   title: string;

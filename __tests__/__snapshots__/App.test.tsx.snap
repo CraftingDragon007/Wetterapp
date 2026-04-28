@@ -664,299 +664,315 @@ exports[`App matches snapshot for the ready state 1`] = `
               </View>
               <View
                 style={
-                  {
-                    "backgroundColor": "#ffffff",
-                    "borderColor": "#d7ded4",
-                    "borderRadius": 8,
-                    "borderWidth": 1,
-                    "padding": 16,
-                  }
+                  [
+                    {
+                      "flex": 1,
+                      "gap": 18,
+                      "justifyContent": "space-between",
+                    },
+                  ]
                 }
               >
-                <View
-                  style={
-                    {
-                      "alignItems": "center",
-                      "flexDirection": "row",
-                      "gap": 9,
-                    }
-                  }
-                >
-                  <View
-                    style={
-                      [
-                        {
-                          "borderRadius": 4,
-                          "height": 12,
-                          "width": 12,
-                        },
-                        {
-                          "backgroundColor": "#167248",
-                        },
-                      ]
-                    }
-                  />
-                  <Text
-                    style={
-                      {
-                        "color": "#111714",
-                        "flex": 1,
-                        "fontSize": 21,
-                        "fontWeight": "800",
-                      }
-                    }
-                  >
-                    Gut draussen
-                  </Text>
-                </View>
-                <Text
-                  style={
-                    {
-                      "color": "#667066",
-                      "fontSize": 15,
-                      "lineHeight": 22,
-                      "marginTop": 8,
-                    }
-                  }
-                >
-                  Luft, UV und Pollen wirken unauffällig.
-                </Text>
-              </View>
-              <View
-                style={
-                  {
-                    "borderTopColor": "#d7ded4",
-                    "borderTopWidth": 1,
-                  }
-                }
-              >
-                <View
-                  style={
-                    {
-                      "alignItems": "center",
-                      "borderBottomColor": "#d7ded4",
-                      "borderBottomWidth": 1,
-                      "flexDirection": "row",
-                      "gap": 16,
-                      "justifyContent": "space-between",
-                      "minHeight": 58,
-                      "paddingVertical": 13,
-                    }
-                  }
-                >
+                <View>
                   <View
                     style={
                       {
-                        "flex": 1,
+                        "backgroundColor": "#ffffff",
+                        "borderColor": "#d7ded4",
+                        "borderRadius": 8,
+                        "borderWidth": 1,
+                        "padding": 16,
                       }
                     }
                   >
+                    <View
+                      style={
+                        {
+                          "alignItems": "center",
+                          "flexDirection": "row",
+                          "gap": 9,
+                        }
+                      }
+                    >
+                      <View
+                        style={
+                          [
+                            {
+                              "borderRadius": 4,
+                              "height": 12,
+                              "width": 12,
+                            },
+                            {
+                              "backgroundColor": "#167248",
+                            },
+                          ]
+                        }
+                      />
+                      <Text
+                        style={
+                          {
+                            "color": "#111714",
+                            "flex": 1,
+                            "fontSize": 21,
+                            "fontWeight": "800",
+                          }
+                        }
+                      >
+                        Gut draussen
+                      </Text>
+                    </View>
                     <Text
                       style={
                         {
                           "color": "#667066",
-                          "fontSize": 14,
+                          "fontSize": 15,
+                          "lineHeight": 22,
+                          "marginTop": 8,
                         }
                       }
                     >
-                      UV
-                    </Text>
-                    <Text
-                      style={
-                        {
-                          "color": "#667066",
-                          "fontSize": 12,
-                          "marginTop": 3,
-                        }
-                      }
-                    >
-                      Index 2,0
+                      Luft, UV und Pollen wirken unauffällig.
                     </Text>
                   </View>
-                  <Text
-                    style={
-                      {
-                        "color": "#111714",
-                        "flexShrink": 1,
-                        "fontSize": 16,
-                        "fontWeight": "700",
-                        "textAlign": "right",
-                      }
-                    }
-                  >
-                    Niedrig
-                  </Text>
                 </View>
                 <View
                   style={
-                    {
-                      "alignItems": "center",
-                      "borderBottomColor": "#d7ded4",
-                      "borderBottomWidth": 1,
-                      "flexDirection": "row",
-                      "gap": 16,
-                      "justifyContent": "space-between",
-                      "minHeight": 58,
-                      "paddingVertical": 13,
-                    }
+                    [
+                      {
+                        "borderTopColor": "#d7ded4",
+                        "borderTopWidth": 1,
+                      },
+                    ]
                   }
                 >
                   <View
                     style={
                       {
-                        "flex": 1,
+                        "alignItems": "center",
+                        "borderBottomColor": "#d7ded4",
+                        "borderBottomWidth": 1,
+                        "flexDirection": "row",
+                        "gap": 16,
+                        "justifyContent": "space-between",
+                        "minHeight": 58,
+                        "paddingVertical": 13,
                       }
                     }
                   >
-                    <Text
+                    <View
                       style={
                         {
-                          "color": "#667066",
-                          "fontSize": 14,
+                          "flex": 1,
                         }
                       }
                     >
-                      Luft
-                    </Text>
+                      <Text
+                        style={
+                          {
+                            "color": "#667066",
+                            "fontSize": 14,
+                          }
+                        }
+                      >
+                        UV
+                      </Text>
+                      <Text
+                        style={
+                          {
+                            "color": "#667066",
+                            "fontSize": 12,
+                            "marginTop": 3,
+                          }
+                        }
+                      >
+                        Index 2,0
+                      </Text>
+                    </View>
                     <Text
                       style={
                         {
-                          "color": "#667066",
-                          "fontSize": 12,
-                          "marginTop": 3,
+                          "color": "#111714",
+                          "flexShrink": 1,
+                          "fontSize": 16,
+                          "fontWeight": "700",
+                          "textAlign": "right",
                         }
                       }
                     >
-                      AQI 41
+                      Niedrig
                     </Text>
                   </View>
-                  <Text
-                    style={
-                      {
-                        "color": "#111714",
-                        "flexShrink": 1,
-                        "fontSize": 16,
-                        "fontWeight": "700",
-                        "textAlign": "right",
-                      }
-                    }
-                  >
-                    Sauber
-                  </Text>
-                </View>
-                <View
-                  style={
-                    {
-                      "alignItems": "center",
-                      "borderBottomColor": "#d7ded4",
-                      "borderBottomWidth": 1,
-                      "flexDirection": "row",
-                      "gap": 16,
-                      "justifyContent": "space-between",
-                      "minHeight": 58,
-                      "paddingVertical": 13,
-                    }
-                  }
-                >
                   <View
                     style={
                       {
-                        "flex": 1,
+                        "alignItems": "center",
+                        "borderBottomColor": "#d7ded4",
+                        "borderBottomWidth": 1,
+                        "flexDirection": "row",
+                        "gap": 16,
+                        "justifyContent": "space-between",
+                        "minHeight": 58,
+                        "paddingVertical": 13,
                       }
                     }
                   >
-                    <Text
+                    <View
                       style={
                         {
-                          "color": "#667066",
-                          "fontSize": 14,
+                          "flex": 1,
                         }
                       }
                     >
-                      Pollen
-                    </Text>
+                      <Text
+                        style={
+                          {
+                            "color": "#667066",
+                            "fontSize": 14,
+                          }
+                        }
+                      >
+                        Luft
+                      </Text>
+                      <Text
+                        style={
+                          {
+                            "color": "#667066",
+                            "fontSize": 12,
+                            "marginTop": 3,
+                          }
+                        }
+                      >
+                        AQI 41
+                      </Text>
+                    </View>
                     <Text
                       style={
                         {
-                          "color": "#667066",
-                          "fontSize": 12,
-                          "marginTop": 3,
+                          "color": "#111714",
+                          "flexShrink": 1,
+                          "fontSize": 16,
+                          "fontWeight": "700",
+                          "textAlign": "right",
                         }
                       }
                     >
-                      Spitze 4
+                      Sauber
                     </Text>
                   </View>
-                  <Text
-                    style={
-                      {
-                        "color": "#111714",
-                        "flexShrink": 1,
-                        "fontSize": 16,
-                        "fontWeight": "700",
-                        "textAlign": "right",
-                      }
-                    }
-                  >
-                    Niedrig
-                  </Text>
-                </View>
-                <View
-                  style={
-                    {
-                      "alignItems": "center",
-                      "borderBottomColor": "#d7ded4",
-                      "borderBottomWidth": 1,
-                      "flexDirection": "row",
-                      "gap": 16,
-                      "justifyContent": "space-between",
-                      "minHeight": 58,
-                      "paddingVertical": 13,
-                    }
-                  }
-                >
                   <View
                     style={
                       {
-                        "flex": 1,
+                        "alignItems": "center",
+                        "borderBottomColor": "#d7ded4",
+                        "borderBottomWidth": 1,
+                        "flexDirection": "row",
+                        "gap": 16,
+                        "justifyContent": "space-between",
+                        "minHeight": 58,
+                        "paddingVertical": 13,
                       }
                     }
                   >
-                    <Text
+                    <View
                       style={
                         {
-                          "color": "#667066",
-                          "fontSize": 14,
+                          "flex": 1,
                         }
                       }
                     >
-                      PM2.5
-                    </Text>
+                      <Text
+                        style={
+                          {
+                            "color": "#667066",
+                            "fontSize": 14,
+                          }
+                        }
+                      >
+                        Pollen
+                      </Text>
+                      <Text
+                        style={
+                          {
+                            "color": "#667066",
+                            "fontSize": 12,
+                            "marginTop": 3,
+                          }
+                        }
+                      >
+                        Spitze 4
+                      </Text>
+                    </View>
                     <Text
                       style={
                         {
-                          "color": "#667066",
-                          "fontSize": 12,
-                          "marginTop": 3,
+                          "color": "#111714",
+                          "flexShrink": 1,
+                          "fontSize": 16,
+                          "fontWeight": "700",
+                          "textAlign": "right",
                         }
                       }
                     >
-                      Feinstaub
+                      Niedrig
                     </Text>
                   </View>
-                  <Text
+                  <View
                     style={
                       {
-                        "color": "#111714",
-                        "flexShrink": 1,
-                        "fontSize": 16,
-                        "fontWeight": "700",
-                        "textAlign": "right",
+                        "alignItems": "center",
+                        "borderBottomColor": "#d7ded4",
+                        "borderBottomWidth": 1,
+                        "flexDirection": "row",
+                        "gap": 16,
+                        "justifyContent": "space-between",
+                        "minHeight": 58,
+                        "paddingVertical": 13,
                       }
                     }
                   >
-                    8,2 µg/m³
-                  </Text>
+                    <View
+                      style={
+                        {
+                          "flex": 1,
+                        }
+                      }
+                    >
+                      <Text
+                        style={
+                          {
+                            "color": "#667066",
+                            "fontSize": 14,
+                          }
+                        }
+                      >
+                        PM2.5
+                      </Text>
+                      <Text
+                        style={
+                          {
+                            "color": "#667066",
+                            "fontSize": 12,
+                            "marginTop": 3,
+                          }
+                        }
+                      >
+                        Feinstaub
+                      </Text>
+                    </View>
+                    <Text
+                      style={
+                        {
+                          "color": "#111714",
+                          "flexShrink": 1,
+                          "fontSize": 16,
+                          "fontWeight": "700",
+                          "textAlign": "right",
+                        }
+                      }
+                    >
+                      8,2 µg/m³
+                    </Text>
+                  </View>
                 </View>
               </View>
             </View>
@@ -1295,202 +1311,218 @@ exports[`App matches snapshot for the ready state 1`] = `
               </View>
               <View
                 style={
-                  {
-                    "gap": 10,
-                  }
+                  [
+                    {
+                      "flex": 1,
+                      "gap": 18,
+                      "justifyContent": "space-between",
+                    },
+                  ]
                 }
               >
-                <Text
-                  style={
-                    {
-                      "color": "#667066",
-                      "fontSize": 18,
-                      "fontWeight": "700",
-                    }
-                  }
-                >
-                  Klar
-                </Text>
                 <View
                   style={
-                    {
-                      "alignItems": "flex-start",
-                      "flexDirection": "row",
-                      "gap": 8,
-                    }
+                    [
+                      {
+                        "gap": 10,
+                      },
+                    ]
                   }
                 >
-                  <Text
-                    style={
-                      {
-                        "color": "#111714",
-                        "fontSize": 86,
-                        "fontWeight": "800",
-                        "lineHeight": 92,
-                      }
-                    }
-                  >
-                    20
-                  </Text>
                   <Text
                     style={
                       {
                         "color": "#667066",
                         "fontSize": 18,
-                        "fontWeight": "800",
-                        "marginTop": 17,
+                        "fontWeight": "700",
                       }
                     }
                   >
-                    °C
+                    Klar
                   </Text>
-                </View>
-              </View>
-              <View
-                style={
-                  {
-                    "borderTopColor": "#d7ded4",
-                    "borderTopWidth": 1,
-                  }
-                }
-              >
-                <View
-                  style={
-                    {
-                      "alignItems": "center",
-                      "borderBottomColor": "#d7ded4",
-                      "borderBottomWidth": 1,
-                      "flexDirection": "row",
-                      "gap": 16,
-                      "justifyContent": "space-between",
-                      "minHeight": 58,
-                      "paddingVertical": 13,
-                    }
-                  }
-                >
                   <View
                     style={
                       {
-                        "flex": 1,
+                        "alignItems": "flex-start",
+                        "flexDirection": "row",
+                        "gap": 8,
                       }
                     }
                   >
                     <Text
                       style={
                         {
-                          "color": "#667066",
-                          "fontSize": 14,
+                          "color": "#111714",
+                          "fontSize": 86,
+                          "fontWeight": "800",
+                          "lineHeight": 92,
                         }
                       }
                     >
-                      Gefühlt
+                      20
+                    </Text>
+                    <Text
+                      style={
+                        {
+                          "color": "#667066",
+                          "fontSize": 18,
+                          "fontWeight": "800",
+                          "marginTop": 17,
+                        }
+                      }
+                    >
+                      °C
                     </Text>
                   </View>
-                  <Text
-                    style={
-                      {
-                        "color": "#111714",
-                        "flexShrink": 1,
-                        "fontSize": 16,
-                        "fontWeight": "700",
-                        "textAlign": "right",
-                      }
-                    }
-                  >
-                    18 °C
-                  </Text>
                 </View>
                 <View
                   style={
-                    {
-                      "alignItems": "center",
-                      "borderBottomColor": "#d7ded4",
-                      "borderBottomWidth": 1,
-                      "flexDirection": "row",
-                      "gap": 16,
-                      "justifyContent": "space-between",
-                      "minHeight": 58,
-                      "paddingVertical": 13,
-                    }
+                    [
+                      {
+                        "borderTopColor": "#d7ded4",
+                        "borderTopWidth": 1,
+                      },
+                    ]
                   }
                 >
                   <View
                     style={
                       {
-                        "flex": 1,
+                        "alignItems": "center",
+                        "borderBottomColor": "#d7ded4",
+                        "borderBottomWidth": 1,
+                        "flexDirection": "row",
+                        "gap": 16,
+                        "justifyContent": "space-between",
+                        "minHeight": 58,
+                        "paddingVertical": 13,
                       }
                     }
                   >
-                    <Text
+                    <View
                       style={
                         {
-                          "color": "#667066",
-                          "fontSize": 14,
+                          "flex": 1,
                         }
                       }
                     >
-                      Feuchte
+                      <Text
+                        style={
+                          {
+                            "color": "#667066",
+                            "fontSize": 14,
+                          }
+                        }
+                      >
+                        Gefühlt
+                      </Text>
+                    </View>
+                    <Text
+                      style={
+                        {
+                          "color": "#111714",
+                          "flexShrink": 1,
+                          "fontSize": 16,
+                          "fontWeight": "700",
+                          "textAlign": "right",
+                        }
+                      }
+                    >
+                      18 °C
                     </Text>
                   </View>
-                  <Text
-                    style={
-                      {
-                        "color": "#111714",
-                        "flexShrink": 1,
-                        "fontSize": 16,
-                        "fontWeight": "700",
-                        "textAlign": "right",
-                      }
-                    }
-                  >
-                    61%
-                  </Text>
-                </View>
-                <View
-                  style={
-                    {
-                      "alignItems": "center",
-                      "borderBottomColor": "#d7ded4",
-                      "borderBottomWidth": 1,
-                      "flexDirection": "row",
-                      "gap": 16,
-                      "justifyContent": "space-between",
-                      "minHeight": 58,
-                      "paddingVertical": 13,
-                    }
-                  }
-                >
                   <View
                     style={
                       {
-                        "flex": 1,
+                        "alignItems": "center",
+                        "borderBottomColor": "#d7ded4",
+                        "borderBottomWidth": 1,
+                        "flexDirection": "row",
+                        "gap": 16,
+                        "justifyContent": "space-between",
+                        "minHeight": 58,
+                        "paddingVertical": 13,
                       }
                     }
                   >
-                    <Text
+                    <View
                       style={
                         {
-                          "color": "#667066",
-                          "fontSize": 14,
+                          "flex": 1,
                         }
                       }
                     >
-                      Wind
+                      <Text
+                        style={
+                          {
+                            "color": "#667066",
+                            "fontSize": 14,
+                          }
+                        }
+                      >
+                        Feuchte
+                      </Text>
+                    </View>
+                    <Text
+                      style={
+                        {
+                          "color": "#111714",
+                          "flexShrink": 1,
+                          "fontSize": 16,
+                          "fontWeight": "700",
+                          "textAlign": "right",
+                        }
+                      }
+                    >
+                      61%
                     </Text>
                   </View>
-                  <Text
+                  <View
                     style={
                       {
-                        "color": "#111714",
-                        "flexShrink": 1,
-                        "fontSize": 16,
-                        "fontWeight": "700",
-                        "textAlign": "right",
+                        "alignItems": "center",
+                        "borderBottomColor": "#d7ded4",
+                        "borderBottomWidth": 1,
+                        "flexDirection": "row",
+                        "gap": 16,
+                        "justifyContent": "space-between",
+                        "minHeight": 58,
+                        "paddingVertical": 13,
                       }
                     }
                   >
-                    13,4 km/h
-                  </Text>
+                    <View
+                      style={
+                        {
+                          "flex": 1,
+                        }
+                      }
+                    >
+                      <Text
+                        style={
+                          {
+                            "color": "#667066",
+                            "fontSize": 14,
+                          }
+                        }
+                      >
+                        Wind
+                      </Text>
+                    </View>
+                    <Text
+                      style={
+                        {
+                          "color": "#111714",
+                          "flexShrink": 1,
+                          "fontSize": 16,
+                          "fontWeight": "700",
+                          "textAlign": "right",
+                        }
+                      }
+                    >
+                      13,4 km/h
+                    </Text>
+                  </View>
                 </View>
               </View>
             </View>
@@ -1829,221 +1861,237 @@ exports[`App matches snapshot for the ready state 1`] = `
               </View>
               <View
                 style={
-                  {
-                    "backgroundColor": "#ffffff",
-                    "borderColor": "#d7ded4",
-                    "borderRadius": 8,
-                    "borderWidth": 1,
-                    "padding": 16,
-                  }
+                  [
+                    {
+                      "flex": 1,
+                      "gap": 18,
+                      "justifyContent": "space-between",
+                    },
+                  ]
                 }
               >
-                <View
-                  style={
-                    {
-                      "alignItems": "center",
-                      "flexDirection": "row",
-                      "gap": 9,
-                    }
-                  }
-                >
-                  <View
-                    style={
-                      [
-                        {
-                          "borderRadius": 4,
-                          "height": 12,
-                          "width": 12,
-                        },
-                        {
-                          "backgroundColor": "#a76b13",
-                        },
-                      ]
-                    }
-                  />
-                  <Text
-                    style={
-                      {
-                        "color": "#111714",
-                        "flex": 1,
-                        "fontSize": 21,
-                        "fontWeight": "800",
-                      }
-                    }
-                  >
-                    Ganz normal
-                  </Text>
-                </View>
-                <Text
-                  style={
-                    {
-                      "color": "#667066",
-                      "fontSize": 15,
-                      "lineHeight": 22,
-                      "marginTop": 8,
-                    }
-                  }
-                >
-                  Rundherum ist etwas Bewegung, aber nichts wirkt auffällig.
-                </Text>
-                <Text
-                  style={
-                    {
-                      "color": "#667066",
-                      "fontSize": 13,
-                      "lineHeight": 18,
-                      "marginTop": 12,
-                    }
-                  }
-                >
-                  Aus Kartendaten geschätzt, keine Live-Staugeschwindigkeit.
-                </Text>
-              </View>
-              <View
-                style={
-                  {
-                    "borderTopColor": "#d7ded4",
-                    "borderTopWidth": 1,
-                  }
-                }
-              >
-                <View
-                  style={
-                    {
-                      "alignItems": "center",
-                      "borderBottomColor": "#d7ded4",
-                      "borderBottomWidth": 1,
-                      "flexDirection": "row",
-                      "gap": 16,
-                      "justifyContent": "space-between",
-                      "minHeight": 58,
-                      "paddingVertical": 13,
-                    }
-                  }
-                >
+                <View>
                   <View
                     style={
                       {
-                        "flex": 1,
+                        "backgroundColor": "#ffffff",
+                        "borderColor": "#d7ded4",
+                        "borderRadius": 8,
+                        "borderWidth": 1,
+                        "padding": 16,
                       }
                     }
                   >
+                    <View
+                      style={
+                        {
+                          "alignItems": "center",
+                          "flexDirection": "row",
+                          "gap": 9,
+                        }
+                      }
+                    >
+                      <View
+                        style={
+                          [
+                            {
+                              "borderRadius": 4,
+                              "height": 12,
+                              "width": 12,
+                            },
+                            {
+                              "backgroundColor": "#a76b13",
+                            },
+                          ]
+                        }
+                      />
+                      <Text
+                        style={
+                          {
+                            "color": "#111714",
+                            "flex": 1,
+                            "fontSize": 21,
+                            "fontWeight": "800",
+                          }
+                        }
+                      >
+                        Ganz normal
+                      </Text>
+                    </View>
                     <Text
                       style={
                         {
                           "color": "#667066",
-                          "fontSize": 14,
+                          "fontSize": 15,
+                          "lineHeight": 22,
+                          "marginTop": 8,
                         }
                       }
                     >
-                      Baustellen
+                      Rundherum ist etwas Bewegung, aber nichts wirkt auffällig.
+                    </Text>
+                    <Text
+                      style={
+                        {
+                          "color": "#667066",
+                          "fontSize": 13,
+                          "lineHeight": 18,
+                          "marginTop": 12,
+                        }
+                      }
+                    >
+                      Aus Kartendaten geschätzt, keine Live-Staugeschwindigkeit.
                     </Text>
                   </View>
-                  <Text
-                    style={
-                      {
-                        "color": "#111714",
-                        "flexShrink": 1,
-                        "fontSize": 16,
-                        "fontWeight": "700",
-                        "textAlign": "right",
-                      }
-                    }
-                  >
-                    1 Baustelle in der Nähe
-                  </Text>
                 </View>
                 <View
                   style={
-                    {
-                      "alignItems": "center",
-                      "borderBottomColor": "#d7ded4",
-                      "borderBottomWidth": 1,
-                      "flexDirection": "row",
-                      "gap": 16,
-                      "justifyContent": "space-between",
-                      "minHeight": 58,
-                      "paddingVertical": 13,
-                    }
+                    [
+                      {
+                        "borderTopColor": "#d7ded4",
+                        "borderTopWidth": 1,
+                      },
+                    ]
                   }
                 >
                   <View
                     style={
                       {
-                        "flex": 1,
+                        "alignItems": "center",
+                        "borderBottomColor": "#d7ded4",
+                        "borderBottomWidth": 1,
+                        "flexDirection": "row",
+                        "gap": 16,
+                        "justifyContent": "space-between",
+                        "minHeight": 58,
+                        "paddingVertical": 13,
                       }
                     }
                   >
-                    <Text
+                    <View
                       style={
                         {
-                          "color": "#667066",
-                          "fontSize": 14,
+                          "flex": 1,
                         }
                       }
                     >
-                      Kreuzungen
+                      <Text
+                        style={
+                          {
+                            "color": "#667066",
+                            "fontSize": 14,
+                          }
+                        }
+                      >
+                        Baustellen
+                      </Text>
+                    </View>
+                    <Text
+                      style={
+                        {
+                          "color": "#111714",
+                          "flexShrink": 1,
+                          "fontSize": 16,
+                          "fontWeight": "700",
+                          "textAlign": "right",
+                        }
+                      }
+                    >
+                      1 Baustelle in der Nähe
                     </Text>
                   </View>
-                  <Text
-                    style={
-                      {
-                        "color": "#111714",
-                        "flexShrink": 1,
-                        "fontSize": 16,
-                        "fontWeight": "700",
-                        "textAlign": "right",
-                      }
-                    }
-                  >
-                    Einige geregelte Kreuzungen
-                  </Text>
-                </View>
-                <View
-                  style={
-                    {
-                      "alignItems": "center",
-                      "borderBottomColor": "#d7ded4",
-                      "borderBottomWidth": 1,
-                      "flexDirection": "row",
-                      "gap": 16,
-                      "justifyContent": "space-between",
-                      "minHeight": 58,
-                      "paddingVertical": 13,
-                    }
-                  }
-                >
                   <View
                     style={
                       {
-                        "flex": 1,
+                        "alignItems": "center",
+                        "borderBottomColor": "#d7ded4",
+                        "borderBottomWidth": 1,
+                        "flexDirection": "row",
+                        "gap": 16,
+                        "justifyContent": "space-between",
+                        "minHeight": 58,
+                        "paddingVertical": 13,
                       }
                     }
                   >
-                    <Text
+                    <View
                       style={
                         {
-                          "color": "#667066",
-                          "fontSize": 14,
+                          "flex": 1,
                         }
                       }
                     >
-                      Hauptstrassen
+                      <Text
+                        style={
+                          {
+                            "color": "#667066",
+                            "fontSize": 14,
+                          }
+                        }
+                      >
+                        Kreuzungen
+                      </Text>
+                    </View>
+                    <Text
+                      style={
+                        {
+                          "color": "#111714",
+                          "flexShrink": 1,
+                          "fontSize": 16,
+                          "fontWeight": "700",
+                          "textAlign": "right",
+                        }
+                      }
+                    >
+                      Einige geregelte Kreuzungen
                     </Text>
                   </View>
-                  <Text
+                  <View
                     style={
                       {
-                        "color": "#111714",
-                        "flexShrink": 1,
-                        "fontSize": 16,
-                        "fontWeight": "700",
-                        "textAlign": "right",
+                        "alignItems": "center",
+                        "borderBottomColor": "#d7ded4",
+                        "borderBottomWidth": 1,
+                        "flexDirection": "row",
+                        "gap": 16,
+                        "justifyContent": "space-between",
+                        "minHeight": 58,
+                        "paddingVertical": 13,
                       }
                     }
                   >
-                    Ein paar Hauptstrassen nah
-                  </Text>
+                    <View
+                      style={
+                        {
+                          "flex": 1,
+                        }
+                      }
+                    >
+                      <Text
+                        style={
+                          {
+                            "color": "#667066",
+                            "fontSize": 14,
+                          }
+                        }
+                      >
+                        Hauptstrassen
+                      </Text>
+                    </View>
+                    <Text
+                      style={
+                        {
+                          "color": "#111714",
+                          "flexShrink": 1,
+                          "fontSize": 16,
+                          "fontWeight": "700",
+                          "textAlign": "right",
+                        }
+                      }
+                    >
+                      Ein paar Hauptstrassen nah
+                    </Text>
+                  </View>
                 </View>
               </View>
             </View>
@@ -2435,299 +2483,315 @@ exports[`App matches snapshot with the settings drawer open 1`] = `
               </View>
               <View
                 style={
-                  {
-                    "backgroundColor": "#ffffff",
-                    "borderColor": "#d7ded4",
-                    "borderRadius": 8,
-                    "borderWidth": 1,
-                    "padding": 16,
-                  }
+                  [
+                    {
+                      "flex": 1,
+                      "gap": 18,
+                      "justifyContent": "space-between",
+                    },
+                  ]
                 }
               >
-                <View
-                  style={
-                    {
-                      "alignItems": "center",
-                      "flexDirection": "row",
-                      "gap": 9,
-                    }
-                  }
-                >
-                  <View
-                    style={
-                      [
-                        {
-                          "borderRadius": 4,
-                          "height": 12,
-                          "width": 12,
-                        },
-                        {
-                          "backgroundColor": "#167248",
-                        },
-                      ]
-                    }
-                  />
-                  <Text
-                    style={
-                      {
-                        "color": "#111714",
-                        "flex": 1,
-                        "fontSize": 21,
-                        "fontWeight": "800",
-                      }
-                    }
-                  >
-                    Gut draussen
-                  </Text>
-                </View>
-                <Text
-                  style={
-                    {
-                      "color": "#667066",
-                      "fontSize": 15,
-                      "lineHeight": 22,
-                      "marginTop": 8,
-                    }
-                  }
-                >
-                  Luft, UV und Pollen wirken unauffällig.
-                </Text>
-              </View>
-              <View
-                style={
-                  {
-                    "borderTopColor": "#d7ded4",
-                    "borderTopWidth": 1,
-                  }
-                }
-              >
-                <View
-                  style={
-                    {
-                      "alignItems": "center",
-                      "borderBottomColor": "#d7ded4",
-                      "borderBottomWidth": 1,
-                      "flexDirection": "row",
-                      "gap": 16,
-                      "justifyContent": "space-between",
-                      "minHeight": 58,
-                      "paddingVertical": 13,
-                    }
-                  }
-                >
+                <View>
                   <View
                     style={
                       {
-                        "flex": 1,
+                        "backgroundColor": "#ffffff",
+                        "borderColor": "#d7ded4",
+                        "borderRadius": 8,
+                        "borderWidth": 1,
+                        "padding": 16,
                       }
                     }
                   >
+                    <View
+                      style={
+                        {
+                          "alignItems": "center",
+                          "flexDirection": "row",
+                          "gap": 9,
+                        }
+                      }
+                    >
+                      <View
+                        style={
+                          [
+                            {
+                              "borderRadius": 4,
+                              "height": 12,
+                              "width": 12,
+                            },
+                            {
+                              "backgroundColor": "#167248",
+                            },
+                          ]
+                        }
+                      />
+                      <Text
+                        style={
+                          {
+                            "color": "#111714",
+                            "flex": 1,
+                            "fontSize": 21,
+                            "fontWeight": "800",
+                          }
+                        }
+                      >
+                        Gut draussen
+                      </Text>
+                    </View>
                     <Text
                       style={
                         {
                           "color": "#667066",
-                          "fontSize": 14,
+                          "fontSize": 15,
+                          "lineHeight": 22,
+                          "marginTop": 8,
                         }
                       }
                     >
-                      UV
-                    </Text>
-                    <Text
-                      style={
-                        {
-                          "color": "#667066",
-                          "fontSize": 12,
-                          "marginTop": 3,
-                        }
-                      }
-                    >
-                      Index 2,0
+                      Luft, UV und Pollen wirken unauffällig.
                     </Text>
                   </View>
-                  <Text
-                    style={
-                      {
-                        "color": "#111714",
-                        "flexShrink": 1,
-                        "fontSize": 16,
-                        "fontWeight": "700",
-                        "textAlign": "right",
-                      }
-                    }
-                  >
-                    Niedrig
-                  </Text>
                 </View>
                 <View
                   style={
-                    {
-                      "alignItems": "center",
-                      "borderBottomColor": "#d7ded4",
-                      "borderBottomWidth": 1,
-                      "flexDirection": "row",
-                      "gap": 16,
-                      "justifyContent": "space-between",
-                      "minHeight": 58,
-                      "paddingVertical": 13,
-                    }
+                    [
+                      {
+                        "borderTopColor": "#d7ded4",
+                        "borderTopWidth": 1,
+                      },
+                    ]
                   }
                 >
                   <View
                     style={
                       {
-                        "flex": 1,
+                        "alignItems": "center",
+                        "borderBottomColor": "#d7ded4",
+                        "borderBottomWidth": 1,
+                        "flexDirection": "row",
+                        "gap": 16,
+                        "justifyContent": "space-between",
+                        "minHeight": 58,
+                        "paddingVertical": 13,
                       }
                     }
                   >
-                    <Text
+                    <View
                       style={
                         {
-                          "color": "#667066",
-                          "fontSize": 14,
+                          "flex": 1,
                         }
                       }
                     >
-                      Luft
-                    </Text>
+                      <Text
+                        style={
+                          {
+                            "color": "#667066",
+                            "fontSize": 14,
+                          }
+                        }
+                      >
+                        UV
+                      </Text>
+                      <Text
+                        style={
+                          {
+                            "color": "#667066",
+                            "fontSize": 12,
+                            "marginTop": 3,
+                          }
+                        }
+                      >
+                        Index 2,0
+                      </Text>
+                    </View>
                     <Text
                       style={
                         {
-                          "color": "#667066",
-                          "fontSize": 12,
-                          "marginTop": 3,
+                          "color": "#111714",
+                          "flexShrink": 1,
+                          "fontSize": 16,
+                          "fontWeight": "700",
+                          "textAlign": "right",
                         }
                       }
                     >
-                      AQI 41
+                      Niedrig
                     </Text>
                   </View>
-                  <Text
-                    style={
-                      {
-                        "color": "#111714",
-                        "flexShrink": 1,
-                        "fontSize": 16,
-                        "fontWeight": "700",
-                        "textAlign": "right",
-                      }
-                    }
-                  >
-                    Sauber
-                  </Text>
-                </View>
-                <View
-                  style={
-                    {
-                      "alignItems": "center",
-                      "borderBottomColor": "#d7ded4",
-                      "borderBottomWidth": 1,
-                      "flexDirection": "row",
-                      "gap": 16,
-                      "justifyContent": "space-between",
-                      "minHeight": 58,
-                      "paddingVertical": 13,
-                    }
-                  }
-                >
                   <View
                     style={
                       {
-                        "flex": 1,
+                        "alignItems": "center",
+                        "borderBottomColor": "#d7ded4",
+                        "borderBottomWidth": 1,
+                        "flexDirection": "row",
+                        "gap": 16,
+                        "justifyContent": "space-between",
+                        "minHeight": 58,
+                        "paddingVertical": 13,
                       }
                     }
                   >
-                    <Text
+                    <View
                       style={
                         {
-                          "color": "#667066",
-                          "fontSize": 14,
+                          "flex": 1,
                         }
                       }
                     >
-                      Pollen
-                    </Text>
+                      <Text
+                        style={
+                          {
+                            "color": "#667066",
+                            "fontSize": 14,
+                          }
+                        }
+                      >
+                        Luft
+                      </Text>
+                      <Text
+                        style={
+                          {
+                            "color": "#667066",
+                            "fontSize": 12,
+                            "marginTop": 3,
+                          }
+                        }
+                      >
+                        AQI 41
+                      </Text>
+                    </View>
                     <Text
                       style={
                         {
-                          "color": "#667066",
-                          "fontSize": 12,
-                          "marginTop": 3,
+                          "color": "#111714",
+                          "flexShrink": 1,
+                          "fontSize": 16,
+                          "fontWeight": "700",
+                          "textAlign": "right",
                         }
                       }
                     >
-                      Spitze 4
+                      Sauber
                     </Text>
                   </View>
-                  <Text
-                    style={
-                      {
-                        "color": "#111714",
-                        "flexShrink": 1,
-                        "fontSize": 16,
-                        "fontWeight": "700",
-                        "textAlign": "right",
-                      }
-                    }
-                  >
-                    Niedrig
-                  </Text>
-                </View>
-                <View
-                  style={
-                    {
-                      "alignItems": "center",
-                      "borderBottomColor": "#d7ded4",
-                      "borderBottomWidth": 1,
-                      "flexDirection": "row",
-                      "gap": 16,
-                      "justifyContent": "space-between",
-                      "minHeight": 58,
-                      "paddingVertical": 13,
-                    }
-                  }
-                >
                   <View
                     style={
                       {
-                        "flex": 1,
+                        "alignItems": "center",
+                        "borderBottomColor": "#d7ded4",
+                        "borderBottomWidth": 1,
+                        "flexDirection": "row",
+                        "gap": 16,
+                        "justifyContent": "space-between",
+                        "minHeight": 58,
+                        "paddingVertical": 13,
                       }
                     }
                   >
-                    <Text
+                    <View
                       style={
                         {
-                          "color": "#667066",
-                          "fontSize": 14,
+                          "flex": 1,
                         }
                       }
                     >
-                      PM2.5
-                    </Text>
+                      <Text
+                        style={
+                          {
+                            "color": "#667066",
+                            "fontSize": 14,
+                          }
+                        }
+                      >
+                        Pollen
+                      </Text>
+                      <Text
+                        style={
+                          {
+                            "color": "#667066",
+                            "fontSize": 12,
+                            "marginTop": 3,
+                          }
+                        }
+                      >
+                        Spitze 4
+                      </Text>
+                    </View>
                     <Text
                       style={
                         {
-                          "color": "#667066",
-                          "fontSize": 12,
-                          "marginTop": 3,
+                          "color": "#111714",
+                          "flexShrink": 1,
+                          "fontSize": 16,
+                          "fontWeight": "700",
+                          "textAlign": "right",
                         }
                       }
                     >
-                      Feinstaub
+                      Niedrig
                     </Text>
                   </View>
-                  <Text
+                  <View
                     style={
                       {
-                        "color": "#111714",
-                        "flexShrink": 1,
-                        "fontSize": 16,
-                        "fontWeight": "700",
-                        "textAlign": "right",
+                        "alignItems": "center",
+                        "borderBottomColor": "#d7ded4",
+                        "borderBottomWidth": 1,
+                        "flexDirection": "row",
+                        "gap": 16,
+                        "justifyContent": "space-between",
+                        "minHeight": 58,
+                        "paddingVertical": 13,
                       }
                     }
                   >
-                    8,2 µg/m³
-                  </Text>
+                    <View
+                      style={
+                        {
+                          "flex": 1,
+                        }
+                      }
+                    >
+                      <Text
+                        style={
+                          {
+                            "color": "#667066",
+                            "fontSize": 14,
+                          }
+                        }
+                      >
+                        PM2.5
+                      </Text>
+                      <Text
+                        style={
+                          {
+                            "color": "#667066",
+                            "fontSize": 12,
+                            "marginTop": 3,
+                          }
+                        }
+                      >
+                        Feinstaub
+                      </Text>
+                    </View>
+                    <Text
+                      style={
+                        {
+                          "color": "#111714",
+                          "flexShrink": 1,
+                          "fontSize": 16,
+                          "fontWeight": "700",
+                          "textAlign": "right",
+                        }
+                      }
+                    >
+                      8,2 µg/m³
+                    </Text>
+                  </View>
                 </View>
               </View>
             </View>
@@ -3066,202 +3130,218 @@ exports[`App matches snapshot with the settings drawer open 1`] = `
               </View>
               <View
                 style={
-                  {
-                    "gap": 10,
-                  }
+                  [
+                    {
+                      "flex": 1,
+                      "gap": 18,
+                      "justifyContent": "space-between",
+                    },
+                  ]
                 }
               >
-                <Text
-                  style={
-                    {
-                      "color": "#667066",
-                      "fontSize": 18,
-                      "fontWeight": "700",
-                    }
-                  }
-                >
-                  Klar
-                </Text>
                 <View
                   style={
-                    {
-                      "alignItems": "flex-start",
-                      "flexDirection": "row",
-                      "gap": 8,
-                    }
+                    [
+                      {
+                        "gap": 10,
+                      },
+                    ]
                   }
                 >
-                  <Text
-                    style={
-                      {
-                        "color": "#111714",
-                        "fontSize": 86,
-                        "fontWeight": "800",
-                        "lineHeight": 92,
-                      }
-                    }
-                  >
-                    20
-                  </Text>
                   <Text
                     style={
                       {
                         "color": "#667066",
                         "fontSize": 18,
-                        "fontWeight": "800",
-                        "marginTop": 17,
+                        "fontWeight": "700",
                       }
                     }
                   >
-                    °C
+                    Klar
                   </Text>
-                </View>
-              </View>
-              <View
-                style={
-                  {
-                    "borderTopColor": "#d7ded4",
-                    "borderTopWidth": 1,
-                  }
-                }
-              >
-                <View
-                  style={
-                    {
-                      "alignItems": "center",
-                      "borderBottomColor": "#d7ded4",
-                      "borderBottomWidth": 1,
-                      "flexDirection": "row",
-                      "gap": 16,
-                      "justifyContent": "space-between",
-                      "minHeight": 58,
-                      "paddingVertical": 13,
-                    }
-                  }
-                >
                   <View
                     style={
                       {
-                        "flex": 1,
+                        "alignItems": "flex-start",
+                        "flexDirection": "row",
+                        "gap": 8,
                       }
                     }
                   >
                     <Text
                       style={
                         {
-                          "color": "#667066",
-                          "fontSize": 14,
+                          "color": "#111714",
+                          "fontSize": 86,
+                          "fontWeight": "800",
+                          "lineHeight": 92,
                         }
                       }
                     >
-                      Gefühlt
+                      20
+                    </Text>
+                    <Text
+                      style={
+                        {
+                          "color": "#667066",
+                          "fontSize": 18,
+                          "fontWeight": "800",
+                          "marginTop": 17,
+                        }
+                      }
+                    >
+                      °C
                     </Text>
                   </View>
-                  <Text
-                    style={
-                      {
-                        "color": "#111714",
-                        "flexShrink": 1,
-                        "fontSize": 16,
-                        "fontWeight": "700",
-                        "textAlign": "right",
-                      }
-                    }
-                  >
-                    18 °C
-                  </Text>
                 </View>
                 <View
                   style={
-                    {
-                      "alignItems": "center",
-                      "borderBottomColor": "#d7ded4",
-                      "borderBottomWidth": 1,
-                      "flexDirection": "row",
-                      "gap": 16,
-                      "justifyContent": "space-between",
-                      "minHeight": 58,
-                      "paddingVertical": 13,
-                    }
+                    [
+                      {
+                        "borderTopColor": "#d7ded4",
+                        "borderTopWidth": 1,
+                      },
+                    ]
                   }
                 >
                   <View
                     style={
                       {
-                        "flex": 1,
+                        "alignItems": "center",
+                        "borderBottomColor": "#d7ded4",
+                        "borderBottomWidth": 1,
+                        "flexDirection": "row",
+                        "gap": 16,
+                        "justifyContent": "space-between",
+                        "minHeight": 58,
+                        "paddingVertical": 13,
                       }
                     }
                   >
-                    <Text
+                    <View
                       style={
                         {
-                          "color": "#667066",
-                          "fontSize": 14,
+                          "flex": 1,
                         }
                       }
                     >
-                      Feuchte
+                      <Text
+                        style={
+                          {
+                            "color": "#667066",
+                            "fontSize": 14,
+                          }
+                        }
+                      >
+                        Gefühlt
+                      </Text>
+                    </View>
+                    <Text
+                      style={
+                        {
+                          "color": "#111714",
+                          "flexShrink": 1,
+                          "fontSize": 16,
+                          "fontWeight": "700",
+                          "textAlign": "right",
+                        }
+                      }
+                    >
+                      18 °C
                     </Text>
                   </View>
-                  <Text
-                    style={
-                      {
-                        "color": "#111714",
-                        "flexShrink": 1,
-                        "fontSize": 16,
-                        "fontWeight": "700",
-                        "textAlign": "right",
-                      }
-                    }
-                  >
-                    61%
-                  </Text>
-                </View>
-                <View
-                  style={
-                    {
-                      "alignItems": "center",
-                      "borderBottomColor": "#d7ded4",
-                      "borderBottomWidth": 1,
-                      "flexDirection": "row",
-                      "gap": 16,
-                      "justifyContent": "space-between",
-                      "minHeight": 58,
-                      "paddingVertical": 13,
-                    }
-                  }
-                >
                   <View
                     style={
                       {
-                        "flex": 1,
+                        "alignItems": "center",
+                        "borderBottomColor": "#d7ded4",
+                        "borderBottomWidth": 1,
+                        "flexDirection": "row",
+                        "gap": 16,
+                        "justifyContent": "space-between",
+                        "minHeight": 58,
+                        "paddingVertical": 13,
                       }
                     }
                   >
-                    <Text
+                    <View
                       style={
                         {
-                          "color": "#667066",
-                          "fontSize": 14,
+                          "flex": 1,
                         }
                       }
                     >
-                      Wind
+                      <Text
+                        style={
+                          {
+                            "color": "#667066",
+                            "fontSize": 14,
+                          }
+                        }
+                      >
+                        Feuchte
+                      </Text>
+                    </View>
+                    <Text
+                      style={
+                        {
+                          "color": "#111714",
+                          "flexShrink": 1,
+                          "fontSize": 16,
+                          "fontWeight": "700",
+                          "textAlign": "right",
+                        }
+                      }
+                    >
+                      61%
                     </Text>
                   </View>
-                  <Text
+                  <View
                     style={
                       {
-                        "color": "#111714",
-                        "flexShrink": 1,
-                        "fontSize": 16,
-                        "fontWeight": "700",
-                        "textAlign": "right",
+                        "alignItems": "center",
+                        "borderBottomColor": "#d7ded4",
+                        "borderBottomWidth": 1,
+                        "flexDirection": "row",
+                        "gap": 16,
+                        "justifyContent": "space-between",
+                        "minHeight": 58,
+                        "paddingVertical": 13,
                       }
                     }
                   >
-                    13,4 km/h
-                  </Text>
+                    <View
+                      style={
+                        {
+                          "flex": 1,
+                        }
+                      }
+                    >
+                      <Text
+                        style={
+                          {
+                            "color": "#667066",
+                            "fontSize": 14,
+                          }
+                        }
+                      >
+                        Wind
+                      </Text>
+                    </View>
+                    <Text
+                      style={
+                        {
+                          "color": "#111714",
+                          "flexShrink": 1,
+                          "fontSize": 16,
+                          "fontWeight": "700",
+                          "textAlign": "right",
+                        }
+                      }
+                    >
+                      13,4 km/h
+                    </Text>
+                  </View>
                 </View>
               </View>
             </View>
@@ -3600,221 +3680,237 @@ exports[`App matches snapshot with the settings drawer open 1`] = `
               </View>
               <View
                 style={
-                  {
-                    "backgroundColor": "#ffffff",
-                    "borderColor": "#d7ded4",
-                    "borderRadius": 8,
-                    "borderWidth": 1,
-                    "padding": 16,
-                  }
+                  [
+                    {
+                      "flex": 1,
+                      "gap": 18,
+                      "justifyContent": "space-between",
+                    },
+                  ]
                 }
               >
-                <View
-                  style={
-                    {
-                      "alignItems": "center",
-                      "flexDirection": "row",
-                      "gap": 9,
-                    }
-                  }
-                >
-                  <View
-                    style={
-                      [
-                        {
-                          "borderRadius": 4,
-                          "height": 12,
-                          "width": 12,
-                        },
-                        {
-                          "backgroundColor": "#a76b13",
-                        },
-                      ]
-                    }
-                  />
-                  <Text
-                    style={
-                      {
-                        "color": "#111714",
-                        "flex": 1,
-                        "fontSize": 21,
-                        "fontWeight": "800",
-                      }
-                    }
-                  >
-                    Ganz normal
-                  </Text>
-                </View>
-                <Text
-                  style={
-                    {
-                      "color": "#667066",
-                      "fontSize": 15,
-                      "lineHeight": 22,
-                      "marginTop": 8,
-                    }
-                  }
-                >
-                  Rundherum ist etwas Bewegung, aber nichts wirkt auffällig.
-                </Text>
-                <Text
-                  style={
-                    {
-                      "color": "#667066",
-                      "fontSize": 13,
-                      "lineHeight": 18,
-                      "marginTop": 12,
-                    }
-                  }
-                >
-                  Aus Kartendaten geschätzt, keine Live-Staugeschwindigkeit.
-                </Text>
-              </View>
-              <View
-                style={
-                  {
-                    "borderTopColor": "#d7ded4",
-                    "borderTopWidth": 1,
-                  }
-                }
-              >
-                <View
-                  style={
-                    {
-                      "alignItems": "center",
-                      "borderBottomColor": "#d7ded4",
-                      "borderBottomWidth": 1,
-                      "flexDirection": "row",
-                      "gap": 16,
-                      "justifyContent": "space-between",
-                      "minHeight": 58,
-                      "paddingVertical": 13,
-                    }
-                  }
-                >
+                <View>
                   <View
                     style={
                       {
-                        "flex": 1,
+                        "backgroundColor": "#ffffff",
+                        "borderColor": "#d7ded4",
+                        "borderRadius": 8,
+                        "borderWidth": 1,
+                        "padding": 16,
                       }
                     }
                   >
+                    <View
+                      style={
+                        {
+                          "alignItems": "center",
+                          "flexDirection": "row",
+                          "gap": 9,
+                        }
+                      }
+                    >
+                      <View
+                        style={
+                          [
+                            {
+                              "borderRadius": 4,
+                              "height": 12,
+                              "width": 12,
+                            },
+                            {
+                              "backgroundColor": "#a76b13",
+                            },
+                          ]
+                        }
+                      />
+                      <Text
+                        style={
+                          {
+                            "color": "#111714",
+                            "flex": 1,
+                            "fontSize": 21,
+                            "fontWeight": "800",
+                          }
+                        }
+                      >
+                        Ganz normal
+                      </Text>
+                    </View>
                     <Text
                       style={
                         {
                           "color": "#667066",
-                          "fontSize": 14,
+                          "fontSize": 15,
+                          "lineHeight": 22,
+                          "marginTop": 8,
                         }
                       }
                     >
-                      Baustellen
+                      Rundherum ist etwas Bewegung, aber nichts wirkt auffällig.
+                    </Text>
+                    <Text
+                      style={
+                        {
+                          "color": "#667066",
+                          "fontSize": 13,
+                          "lineHeight": 18,
+                          "marginTop": 12,
+                        }
+                      }
+                    >
+                      Aus Kartendaten geschätzt, keine Live-Staugeschwindigkeit.
                     </Text>
                   </View>
-                  <Text
-                    style={
-                      {
-                        "color": "#111714",
-                        "flexShrink": 1,
-                        "fontSize": 16,
-                        "fontWeight": "700",
-                        "textAlign": "right",
-                      }
-                    }
-                  >
-                    1 Baustelle in der Nähe
-                  </Text>
                 </View>
                 <View
                   style={
-                    {
-                      "alignItems": "center",
-                      "borderBottomColor": "#d7ded4",
-                      "borderBottomWidth": 1,
-                      "flexDirection": "row",
-                      "gap": 16,
-                      "justifyContent": "space-between",
-                      "minHeight": 58,
-                      "paddingVertical": 13,
-                    }
+                    [
+                      {
+                        "borderTopColor": "#d7ded4",
+                        "borderTopWidth": 1,
+                      },
+                    ]
                   }
                 >
                   <View
                     style={
                       {
-                        "flex": 1,
+                        "alignItems": "center",
+                        "borderBottomColor": "#d7ded4",
+                        "borderBottomWidth": 1,
+                        "flexDirection": "row",
+                        "gap": 16,
+                        "justifyContent": "space-between",
+                        "minHeight": 58,
+                        "paddingVertical": 13,
                       }
                     }
                   >
-                    <Text
+                    <View
                       style={
                         {
-                          "color": "#667066",
-                          "fontSize": 14,
+                          "flex": 1,
                         }
                       }
                     >
-                      Kreuzungen
+                      <Text
+                        style={
+                          {
+                            "color": "#667066",
+                            "fontSize": 14,
+                          }
+                        }
+                      >
+                        Baustellen
+                      </Text>
+                    </View>
+                    <Text
+                      style={
+                        {
+                          "color": "#111714",
+                          "flexShrink": 1,
+                          "fontSize": 16,
+                          "fontWeight": "700",
+                          "textAlign": "right",
+                        }
+                      }
+                    >
+                      1 Baustelle in der Nähe
                     </Text>
                   </View>
-                  <Text
-                    style={
-                      {
-                        "color": "#111714",
-                        "flexShrink": 1,
-                        "fontSize": 16,
-                        "fontWeight": "700",
-                        "textAlign": "right",
-                      }
-                    }
-                  >
-                    Einige geregelte Kreuzungen
-                  </Text>
-                </View>
-                <View
-                  style={
-                    {
-                      "alignItems": "center",
-                      "borderBottomColor": "#d7ded4",
-                      "borderBottomWidth": 1,
-                      "flexDirection": "row",
-                      "gap": 16,
-                      "justifyContent": "space-between",
-                      "minHeight": 58,
-                      "paddingVertical": 13,
-                    }
-                  }
-                >
                   <View
                     style={
                       {
-                        "flex": 1,
+                        "alignItems": "center",
+                        "borderBottomColor": "#d7ded4",
+                        "borderBottomWidth": 1,
+                        "flexDirection": "row",
+                        "gap": 16,
+                        "justifyContent": "space-between",
+                        "minHeight": 58,
+                        "paddingVertical": 13,
                       }
                     }
                   >
-                    <Text
+                    <View
                       style={
                         {
-                          "color": "#667066",
-                          "fontSize": 14,
+                          "flex": 1,
                         }
                       }
                     >
-                      Hauptstrassen
+                      <Text
+                        style={
+                          {
+                            "color": "#667066",
+                            "fontSize": 14,
+                          }
+                        }
+                      >
+                        Kreuzungen
+                      </Text>
+                    </View>
+                    <Text
+                      style={
+                        {
+                          "color": "#111714",
+                          "flexShrink": 1,
+                          "fontSize": 16,
+                          "fontWeight": "700",
+                          "textAlign": "right",
+                        }
+                      }
+                    >
+                      Einige geregelte Kreuzungen
                     </Text>
                   </View>
-                  <Text
+                  <View
                     style={
                       {
-                        "color": "#111714",
-                        "flexShrink": 1,
-                        "fontSize": 16,
-                        "fontWeight": "700",
-                        "textAlign": "right",
+                        "alignItems": "center",
+                        "borderBottomColor": "#d7ded4",
+                        "borderBottomWidth": 1,
+                        "flexDirection": "row",
+                        "gap": 16,
+                        "justifyContent": "space-between",
+                        "minHeight": 58,
+                        "paddingVertical": 13,
                       }
                     }
                   >
-                    Ein paar Hauptstrassen nah
-                  </Text>
+                    <View
+                      style={
+                        {
+                          "flex": 1,
+                        }
+                      }
+                    >
+                      <Text
+                        style={
+                          {
+                            "color": "#667066",
+                            "fontSize": 14,
+                          }
+                        }
+                      >
+                        Hauptstrassen
+                      </Text>
+                    </View>
+                    <Text
+                      style={
+                        {
+                          "color": "#111714",
+                          "flexShrink": 1,
+                          "fontSize": 16,
+                          "fontWeight": "700",
+                          "textAlign": "right",
+                        }
+                      }
+                    >
+                      Ein paar Hauptstrassen nah
+                    </Text>
+                  </View>
                 </View>
               </View>
             </View>

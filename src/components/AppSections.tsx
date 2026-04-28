@@ -43,12 +43,14 @@ function PageIndicator({
 export function PageFrame({
   children,
   index,
+  isLandscape,
   scrollY,
   styles,
   viewportHeight,
 }: {
   children: ReactNode;
   index: number;
+  isLandscape: boolean;
   scrollY: Animated.Value;
   styles: Styles;
   viewportHeight: number;
@@ -67,7 +69,13 @@ export function PageFrame({
   });
 
   return (
-    <Animated.View style={[styles.pageContent, { opacity, transform: [{ translateY }] }]}> 
+    <Animated.View
+      style={[
+        styles.pageContent,
+        ...(isLandscape ? [styles.pageContentLandscape] : []),
+        { opacity, transform: [{ translateY }] },
+      ]}
+    >
       {children}
     </Animated.View>
   );
@@ -368,6 +376,7 @@ export function SettingsMenu({
 }
 
 export function OutsidePage({
+  isLandscape,
   locationLabel,
   onOpenSettings,
   outside,
@@ -376,6 +385,7 @@ export function OutsidePage({
   theme,
   viewportHeight,
 }: {
+  isLandscape: boolean;
   locationLabel: string;
   onOpenSettings: () => void;
   outside: OutsideData;
@@ -384,6 +394,12 @@ export function OutsidePage({
   theme: Theme;
   viewportHeight: number;
 }) {
+  const pageBodyStyle = [
+    styles.pageBody,
+    ...(isLandscape ? [styles.pageBodyLandscape] : []),
+  ];
+  const paneStyle = isLandscape ? styles.pagePane : undefined;
+
   return (
     <>
       <Header
@@ -395,44 +411,49 @@ export function OutsidePage({
         title="Draussen"
         viewportHeight={viewportHeight}
       />
-      <SummaryBlock
-        styles={styles}
-        summary={outside.summary}
-        theme={theme}
-        title={outside.status}
-        tone={outside.tone}
-      />
-      <View style={styles.section}>
-        <DataRow
-          label="UV"
-          meta={`Index ${formatNumber(outside.uvIndex, 1)}`}
-          styles={styles}
-          value={getUvLabel(outside.uvIndex)}
-        />
-        <DataRow
-          label="Luft"
-          meta={`AQI ${outside.aqi === null ? '-' : Math.round(outside.aqi)}`}
-          styles={styles}
-          value={getAirLabel(outside.aqi)}
-        />
-        <DataRow
-          label="Pollen"
-          meta={`Spitze ${formatNumber(outside.pollen, 0)}`}
-          styles={styles}
-          value={getPollenLabel(outside.pollen)}
-        />
-        <DataRow
-          label="PM2.5"
-          meta="Feinstaub"
-          styles={styles}
-          value={outside.pm25 === null ? 'Nicht verfügbar' : `${formatNumber(outside.pm25, 1)} µg/m³`}
-        />
+      <View style={pageBodyStyle}>
+        <View style={paneStyle}>
+          <SummaryBlock
+            styles={styles}
+            summary={outside.summary}
+            theme={theme}
+            title={outside.status}
+            tone={outside.tone}
+          />
+        </View>
+        <View style={[styles.section, ...(isLandscape ? [styles.pagePane] : [])]}>
+          <DataRow
+            label="UV"
+            meta={`Index ${formatNumber(outside.uvIndex, 1)}`}
+            styles={styles}
+            value={getUvLabel(outside.uvIndex)}
+          />
+          <DataRow
+            label="Luft"
+            meta={`AQI ${outside.aqi === null ? '-' : Math.round(outside.aqi)}`}
+            styles={styles}
+            value={getAirLabel(outside.aqi)}
+          />
+          <DataRow
+            label="Pollen"
+            meta={`Spitze ${formatNumber(outside.pollen, 0)}`}
+            styles={styles}
+            value={getPollenLabel(outside.pollen)}
+          />
+          <DataRow
+            label="PM2.5"
+            meta="Feinstaub"
+            styles={styles}
+            value={outside.pm25 === null ? 'Nicht verfügbar' : `${formatNumber(outside.pm25, 1)} µg/m³`}
+          />
+        </View>
       </View>
     </>
   );
 }
 
 export function WeatherPage({
+  isLandscape,
   locationLabel,
   onOpenSettings,
   scrollY,
@@ -440,6 +461,7 @@ export function WeatherPage({
   viewportHeight,
   weather,
 }: {
+  isLandscape: boolean;
   locationLabel: string;
   onOpenSettings: () => void;
   scrollY: Animated.Value;
@@ -448,6 +470,10 @@ export function WeatherPage({
   weather: WeatherData;
 }) {
   const weatherDescription = describeWeatherCode(weather.weatherCode);
+  const pageBodyStyle = [
+    styles.pageBody,
+    ...(isLandscape ? [styles.pageBodyLandscape] : []),
+  ];
 
   return (
     <>
@@ -460,31 +486,39 @@ export function WeatherPage({
         title="Wetter"
         viewportHeight={viewportHeight}
       />
-      <View style={styles.temperatureBlock}>
-        <Text style={styles.weatherStatus}>{weatherDescription}</Text>
-        <View style={styles.temperatureRow}>
-          <Text style={styles.temperature}>{Math.round(weather.temperature)}</Text>
-          <Text style={styles.temperatureUnit}>{weather.temperatureUnit}</Text>
+      <View style={pageBodyStyle}>
+        <View
+          style={[
+            styles.temperatureBlock,
+            ...(isLandscape ? [styles.temperatureBlockLandscape, styles.pagePane] : []),
+          ]}
+        >
+          <Text style={styles.weatherStatus}>{weatherDescription}</Text>
+          <View style={styles.temperatureRow}>
+            <Text style={styles.temperature}>{Math.round(weather.temperature)}</Text>
+            <Text style={styles.temperatureUnit}>{weather.temperatureUnit}</Text>
+          </View>
         </View>
-      </View>
-      <View style={styles.section}>
-        <DataRow
-          label="Gefühlt"
-          styles={styles}
-          value={`${formatNumber(weather.apparentTemperature)} ${weather.temperatureUnit}`}
-        />
-        <DataRow label="Feuchte" styles={styles} value={`${formatNumber(weather.humidity)}%`} />
-        <DataRow
-          label="Wind"
-          styles={styles}
-          value={`${formatNumber(weather.windSpeed, 1)} ${weather.windSpeedUnit}`}
-        />
+        <View style={[styles.section, ...(isLandscape ? [styles.pagePane] : [])]}>
+          <DataRow
+            label="Gefühlt"
+            styles={styles}
+            value={`${formatNumber(weather.apparentTemperature)} ${weather.temperatureUnit}`}
+          />
+          <DataRow label="Feuchte" styles={styles} value={`${formatNumber(weather.humidity)}%`} />
+          <DataRow
+            label="Wind"
+            styles={styles}
+            value={`${formatNumber(weather.windSpeed, 1)} ${weather.windSpeedUnit}`}
+          />
+        </View>
       </View>
     </>
   );
 }
 
 export function RoadsPage({
+  isLandscape,
   locationLabel,
   onOpenSettings,
   roads,
@@ -493,6 +527,7 @@ export function RoadsPage({
   theme,
   viewportHeight,
 }: {
+  isLandscape: boolean;
   locationLabel: string;
   onOpenSettings: () => void;
   roads: RoadData;
@@ -502,6 +537,11 @@ export function RoadsPage({
   viewportHeight: number;
 }) {
   const factors = getRoadFactors(roads);
+  const pageBodyStyle = [
+    styles.pageBody,
+    ...(isLandscape ? [styles.pageBodyLandscape] : []),
+  ];
+  const paneStyle = isLandscape ? styles.pagePane : undefined;
 
   return (
     <>
@@ -514,26 +554,30 @@ export function RoadsPage({
         title="Strassen"
         viewportHeight={viewportHeight}
       />
-      <SummaryBlock
-        styles={styles}
-        summary={roads.summary}
-        theme={theme}
-        title={roads.status}
-        tone={roads.tone}
-      >
-        <Text style={styles.explainerText}>
-          Aus Kartendaten geschätzt, keine Live-Staugeschwindigkeit.
-        </Text>
-      </SummaryBlock>
-      <View style={styles.section}>
-        {factors.map((factor) => (
-          <DataRow
-            key={factor.label}
-            label={factor.label}
+      <View style={pageBodyStyle}>
+        <View style={paneStyle}>
+          <SummaryBlock
             styles={styles}
-            value={factor.value}
-          />
-        ))}
+            summary={roads.summary}
+            theme={theme}
+            title={roads.status}
+            tone={roads.tone}
+          >
+            <Text style={styles.explainerText}>
+              Aus Kartendaten geschätzt, keine Live-Staugeschwindigkeit.
+            </Text>
+          </SummaryBlock>
+        </View>
+        <View style={[styles.section, ...(isLandscape ? [styles.pagePane] : [])]}>
+          {factors.map((factor) => (
+            <DataRow
+              key={factor.label}
+              label={factor.label}
+              styles={styles}
+              value={factor.value}
+            />
+          ))}
+        </View>
       </View>
     </>
   );

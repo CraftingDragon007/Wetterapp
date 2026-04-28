@@ -2,6 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { act, renderHookAsync, waitFor } from '@testing-library/react-native';
 import * as Location from 'expo-location';
 import { AppState } from 'react-native';
+import type { AppStateStatus } from 'react-native';
 
 import { useLiveDataSync } from '../src/hooks/useLiveDataSync';
 import * as dataService from '../src/services/data';
@@ -41,7 +42,7 @@ jest.mock('../src/services/data', () => {
 const mockedAsyncStorage = jest.mocked(AsyncStorage);
 const mockedLocation = jest.mocked(Location);
 const mockedDataService = jest.mocked(dataService);
-let appStateChangeHandler: ((state: string) => void) | null = null;
+let appStateChangeHandler: ((state: AppStateStatus) => void) | null = null;
 
 const sampleWeather = {
   apparentTemperature: 18,
@@ -263,6 +264,8 @@ describe('useLiveDataSync', () => {
     await act(async () => {
       resolvePermission({
         canAskAgain: false,
+        expires: 'never',
+        granted: false,
         status: Location.PermissionStatus.DENIED,
       });
     });

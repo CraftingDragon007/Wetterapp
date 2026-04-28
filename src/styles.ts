@@ -155,6 +155,31 @@ export function createStyles(theme: Theme) {
       justifyContent: 'space-between',
       width: '100%',
     },
+    pageContentLandscape: {
+      gap: 18,
+      justifyContent: 'flex-start',
+    },
+    pageLandscape: {
+      paddingHorizontal: 28,
+    },
+    pageBody: {
+      flex: 1,
+      gap: 18,
+      justifyContent: 'space-between',
+    },
+    pageBodyLandscape: {
+      alignItems: 'stretch',
+      flex: 1,
+      flexDirection: 'row',
+      gap: 20,
+      justifyContent: 'flex-start',
+      minHeight: 0,
+    },
+    pagePane: {
+      flex: 1,
+      justifyContent: 'center',
+      minWidth: 0,
+    },
     pageDot: {
       backgroundColor: theme.border,
       borderRadius: 3,
@@ -379,6 +404,9 @@ export function createStyles(theme: Theme) {
     },
     temperatureBlock: {
       gap: 10,
+    },
+    temperatureBlockLandscape: {
+      justifyContent: 'center',
     },
     temperatureRow: {
       alignItems: 'flex-start',

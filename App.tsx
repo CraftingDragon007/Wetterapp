@@ -26,6 +26,7 @@ import type { Scheme, ThemeMode } from './src/types';
 export default function App() {
   const colorScheme = useColorScheme();
   const { height: windowHeight, width: windowWidth } = useWindowDimensions();
+  const isLandscape = windowWidth > windowHeight;
   const [themeMode, setThemeMode] = useState<ThemeMode>('system');
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [viewportHeight, setViewportHeight] = useState(windowHeight);
@@ -66,10 +67,12 @@ export default function App() {
   const drawerWidth = Math.min(Math.max(windowWidth * 0.84, 280), 360);
   const pageInsets = useMemo(
     () => ({
-      paddingBottom: Platform.OS === 'android' ? 42 : 34,
-      paddingTop: (Platform.OS === 'android' ? NativeStatusBar.currentHeight ?? 0 : 0) + 34,
+      paddingBottom: isLandscape ? 22 : Platform.OS === 'android' ? 42 : 34,
+      paddingTop:
+        (Platform.OS === 'android' ? NativeStatusBar.currentHeight ?? 0 : 0) +
+        (isLandscape ? 22 : 34),
     }),
-    [],
+    [isLandscape],
   );
 
   const openSettingsMenu = useCallback(() => {
@@ -307,7 +310,14 @@ export default function App() {
           showsVerticalScrollIndicator={false}
           snapToInterval={viewportHeight}
         >
-          <View style={[styles.page, pageInsets, { height: viewportHeight }]}>
+          <View
+            style={[
+              styles.page,
+              ...(isLandscape ? [styles.pageLandscape] : []),
+              pageInsets,
+              { height: viewportHeight },
+            ]}
+          >
             <Animated.View
               style={[
                 styles.readyIntro,
@@ -321,9 +331,11 @@ export default function App() {
                 index={PAGE_INDEX.outside}
                 scrollY={scrollY}
                 styles={styles}
+                isLandscape={isLandscape}
                 viewportHeight={viewportHeight}
               >
                 <OutsidePage
+                  isLandscape={isLandscape}
                   locationLabel={currentLocationLabel}
                   onOpenSettings={openSettingsMenu}
                   outside={outside}
@@ -336,7 +348,14 @@ export default function App() {
             </Animated.View>
           </View>
 
-          <View style={[styles.page, pageInsets, { height: viewportHeight }]}>
+          <View
+            style={[
+              styles.page,
+              ...(isLandscape ? [styles.pageLandscape] : []),
+              pageInsets,
+              { height: viewportHeight },
+            ]}
+          >
             <Animated.View
               style={[
                 styles.readyIntro,
@@ -350,9 +369,11 @@ export default function App() {
                 index={PAGE_INDEX.weather}
                 scrollY={scrollY}
                 styles={styles}
+                isLandscape={isLandscape}
                 viewportHeight={viewportHeight}
               >
                 <WeatherPage
+                  isLandscape={isLandscape}
                   locationLabel={currentLocationLabel}
                   onOpenSettings={openSettingsMenu}
                   scrollY={scrollY}
@@ -364,7 +385,14 @@ export default function App() {
             </Animated.View>
           </View>
 
-          <View style={[styles.page, pageInsets, { height: viewportHeight }]}>
+          <View
+            style={[
+              styles.page,
+              ...(isLandscape ? [styles.pageLandscape] : []),
+              pageInsets,
+              { height: viewportHeight },
+            ]}
+          >
             <Animated.View
               style={[
                 styles.readyIntro,
@@ -378,9 +406,11 @@ export default function App() {
                 index={PAGE_INDEX.roads}
                 scrollY={scrollY}
                 styles={styles}
+                isLandscape={isLandscape}
                 viewportHeight={viewportHeight}
               >
                 <RoadsPage
+                  isLandscape={isLandscape}
                   locationLabel={currentLocationLabel}
                   onOpenSettings={openSettingsMenu}
                   roads={roads}

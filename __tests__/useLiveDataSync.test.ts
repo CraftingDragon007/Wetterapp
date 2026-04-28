@@ -1,8 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { act, renderHookAsync, waitFor } from '@testing-library/react-native';
 import * as Location from 'expo-location';
-import { AppState } from 'react-native';
-import type { AppStateStatus } from 'react-native';
+import { AppState, type AppStateStatus } from 'react-native';
 
 import { useLiveDataSync } from '../src/hooks/useLiveDataSync';
 import * as dataService from '../src/services/data';
@@ -267,7 +266,7 @@ describe('useLiveDataSync', () => {
         expires: 'never',
         granted: false,
         status: Location.PermissionStatus.DENIED,
-      });
+      } as Awaited<ReturnType<typeof Location.requestForegroundPermissionsAsync>>);
     });
 
     await waitFor(() => expect(result.current.phase).toBe('ready'));

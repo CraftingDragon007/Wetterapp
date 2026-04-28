@@ -3,8 +3,8 @@
     "name": "Wetterapp",
     "slug": "wetterapp",
     "version": "1.0.0",
-    "orientation": "default",
-    "icon": "./assets/icon.png",
+    "orientation": "portrait",
+    "icon": "./assets/icon.jpeg",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "splash": {
@@ -17,7 +17,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/icon.jpeg",
         "backgroundColor": "#ffffff"
       },
       "predictiveBackGestureEnabled": false,
